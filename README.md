@@ -1,7 +1,12 @@
-# Lendr
-Lend stuff to your friends
+# Lendr2
+Iteration of the original "lend stuff to your friends" project
 
-created by:
+## Created By:
 Travis Huff
 Andres Olivero
 Eddie Park
+
+## Iteration Contributors:
+Edward Guo
+Ryan Bas
+Thai Nguyen
