@@ -38,6 +38,9 @@ class Tile extends Component {
     if (this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 27) {
       this.clickToFlip();
     }
+    if (!this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 13) {
+      this.clickToFlip();
+    }
   }
 
   render() {
@@ -60,6 +63,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
+            <Borrow tileId={tileId}/>
           </div>
         </FlipCard>
       </div>
@@ -67,4 +71,17 @@ class Tile extends Component {
   }
 }
 
+class Borrow extends Component {
+  borrowItem() {
+    console.log(`Trying to borrow.`);
+    console.log(this.props);
+  }
+  render() {
+    return (
+      <div>
+        <button type="submit" className="btn btn-success" onClick={ this.borrowItem.bind(this) }>Borrow this</button>
+      </div>
+    );
+  }
+}
 export default Tile;
