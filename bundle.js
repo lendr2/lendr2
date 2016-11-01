@@ -112,12 +112,9 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
-	  _react2.default.createElement(
-	    _reactRouter.Route,
-	    { path: '/', component: _Start2.default },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _Signup2.default })
-	  ),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Start2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _Signup2.default }),
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/feed', component: _Feed2.default },
@@ -26557,7 +26554,20 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'start-container' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Lendr'
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'share stuff with your friends.'
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          'form',
 	          { className: 'form-inline', onSubmit: this.verifyUser },
@@ -26568,6 +26578,7 @@
 	            _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'username' }),
 	            _react2.default.createElement('br', null)
 	          ),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group' },
@@ -26575,10 +26586,16 @@
 	            _react2.default.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'password' }),
 	            _react2.default.createElement('br', null)
 	          ),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit', className: 'btn btn-success' },
 	            'Login'
+	          ),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/', className: 'btn btn-primary start-btn' },
+	            'Back'
 	          )
 	        )
 	      );
@@ -26628,7 +26645,7 @@
 	  _createClass(Signup, [{
 	    key: 'createUser',
 	    value: function createUser(event) {
-	      // need this
+	      // prevent page refresh
 	      event.preventDefault();
 
 	      // access username and password values
@@ -26651,18 +26668,40 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'start-container' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Lendr'
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'share stuff with your friends.'
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          'form',
 	          { className: 'form-inline', onSubmit: this.createUser },
 	          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'username' }),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'password' }),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'street', placeholder: 'street address' }),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'zipcode', placeholder: 'zip code' }),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'button',
 	            { type: 'submit', className: 'btn btn-primary' },
 	            'Sign Up'
+	          ),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/', className: 'btn btn-primary start-btn' },
+	            'Back'
 	          )
 	        )
 	      );
@@ -27260,6 +27299,9 @@
 	      if (this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 27) {
 	        this.clickToFlip();
 	      }
+	      if (!this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 13) {
+	        this.clickToFlip();
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -27305,7 +27347,8 @@
 	              'div',
 	              { className: 'back-child' },
 	              (0, _moment2.default)(tileData[tileId].datedue).format('MM/DD/YYYY')
-	            )
+	            ),
+	            _react2.default.createElement(Borrow, { tileId: tileId })
 	          )
 	        )
 	      );
@@ -27313,6 +27356,39 @@
 	  }]);
 
 	  return Tile;
+	}(_react.Component);
+
+	var Borrow = function (_Component2) {
+	  _inherits(Borrow, _Component2);
+
+	  function Borrow() {
+	    _classCallCheck(this, Borrow);
+
+	    return _possibleConstructorReturn(this, (Borrow.__proto__ || Object.getPrototypeOf(Borrow)).apply(this, arguments));
+	  }
+
+	  _createClass(Borrow, [{
+	    key: 'borrowItem',
+	    value: function borrowItem() {
+	      console.log('Trying to borrow.');
+	      console.log(this.props);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', className: 'btn btn-success', onClick: this.borrowItem.bind(this) },
+	          'Borrow this'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Borrow;
 	}(_react.Component);
 
 	exports.default = Tile;
@@ -41861,37 +41937,41 @@
 	        'div',
 	        { className: 'account-container' },
 	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          'Account Nav Hub'
-	        ),
-	        _react2.default.createElement(
 	          'div',
-	          { className: 'feed-navbar' },
+	          { className: 'feed-header-container text-center' },
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/browse' },
-	            'Browse '
+	            'h2',
+	            null,
+	            'Account Nav Hub'
 	          ),
 	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/userInfo' },
-	            'Account '
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/upload' },
-	            'Upload '
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/makeRequest' },
-	            'Make Request '
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/wishlist' },
-	            'Wishlist '
+	            'div',
+	            { className: 'feed-navbar' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/browse' },
+	              'Browse '
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/userInfo' },
+	              'Account '
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/upload' },
+	              'Upload '
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/makeRequest' },
+	              'Make Request '
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { className: 'btn btn-default', activeClassName: 'btn btn-primary', to: '/wishlist' },
+	              'Wishlist '
+	            )
 	          )
 	        ),
 	        this.props.children
