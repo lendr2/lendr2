@@ -12,13 +12,14 @@ class Upload extends Component {
     const description = event.target.elements[2].value;
     const imageURL = event.target.elements[3].value;
     const dueDate = event.target.elements[4].value;
+    const owneremail = event.target.elements[5].value;
     const ownerName = document.cookie.split('=').pop();
 
     console.log(item, type, description, imageURL, dueDate);
     console.log(document.cookie.split('=').pop());
 
     //  Post new item to DB
-    $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate, ownername: ownerName })
+    $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate, ownername: ownerName, owneremail: owneremail})
     .done((data) => {
       browserHistory.push('/userInfo');
     })
@@ -43,6 +44,7 @@ class Upload extends Component {
           <div><input type="text" className="form-control" name="description" placeholder="description" /></div>
           <div><input type="text" className="form-control" name="imageURL" placeholder="image URL" /></div>
           <div><input type="date" className="form-control" name="dueDate" placeholder="due date" /></div>
+          <div><input type="email" className="form-control" name="email" placeholder="email" /></div>
           <div><button type="submit" className="btn btn-primary">Submit</button></div>
         </form>
       </div>

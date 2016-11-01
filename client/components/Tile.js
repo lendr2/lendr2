@@ -52,7 +52,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <Borrow tileId={tileId} tileData={this.props.passedState.tileData[tileId]} />
+            <Borrow tileId={tileId} tileData={this.props.passedState.tileData} />
             <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
           </div>
         </FlipCard>
@@ -62,10 +62,13 @@ class Tile extends Component {
 }
 
 class Borrow extends Component {
+  constructor({tileData, tileId}) {
+    super({tileData, tileId});
+    this.email = tileData[tileId].owneremail;
+  }
+  
   borrowItem() {
-    console.log(`Trying to borrow.`);
-    console.log("tileData", this.props.tileData);
-    window.open('mailto:test@example.com');
+    window.open('mailto:' + this.email);
   }
   render() {
     return (
