@@ -48,17 +48,19 @@ h1 {
   align-items: center;
   flex-direction: column;
 }
-.start-contents {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 140px;
-}
-.start-contents h1 {
+.start-container h1 {
   font-size: 7em;
 }
-.login-button {
-  margin: 10px;
+.btn {
+  width: 100px;
+  margin: 5px;
+}
+.form-group {
+  width: 300px;
+  margin: 5px;
+}
+.form-control {
+  margin: 5px;
 }
 
 /* Account component container */
@@ -72,6 +74,9 @@ h1 {
   width: max;  
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 /* Feed component container */
