@@ -3,13 +3,16 @@ const Sequelize = require('sequelize');
 
 requestSchema = {
   lendeename: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    // allowNull:false
   },
   itemname: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    // allowNull:false
   },
   note: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    // allowNull:false
   }
 };
 

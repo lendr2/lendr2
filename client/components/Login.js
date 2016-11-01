@@ -11,7 +11,7 @@ class Login extends Component {
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
 
-    
+
     //////////////////////////////////
     // Post request to verify user
     // Redirects to login page on invalid input

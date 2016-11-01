@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 
 // defining the user schema
@@ -10,16 +11,20 @@ userSchema = {
   // },
   username: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    // allowNull: false
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    // allowNull: false
   },
   location: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    // allowNull: false
   },
   karma: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    // allowNull: false
   }
 }
 
