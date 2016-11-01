@@ -44,6 +44,7 @@ app.get('/wishlist', getWishlist);
 app.post('/signup', createUser);
 app.post('/login', getUser);
 app.post('/uploadItem', createItem);
+app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
 
