@@ -21,7 +21,7 @@ class Upload extends Component {
     //  Post new item to DB
     $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate, ownername: ownerName, owneremail: owneremail})
     .done((data) => {
-      browserHistory.push('/userInfo');
+      browserHistory.push('/browse');
     })
     .fail(() => console.error('error with uploadItem'));
   }

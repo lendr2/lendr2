@@ -8,10 +8,11 @@ class Home extends Component {
       <div className="home">
         <h1>Lendr</h1>
         <div>
-          <Link to="/browse" className="btn btn-primary">Browse</Link>
-          <Link to="/requested" className="btn btn-primary">Requested</Link>
-          <Link to="/account" className="btn btn-primary">Account</Link>
-          <Link to="/" className="btn btn-primary">Logout</Link>
+          <Link to="/browse" className="btn btn-default" activeClassName="btn btn-primary">Browse</Link>
+          <Link to="/upload" className="btn btn-default" activeClassName="btn btn-primary">Upload</Link>
+          <Link to="/requested" className="btn btn-default" activeClassName="btn btn-primary">Requested</Link>
+          <Link to="/makeRequest" className="btn btn-default" activeClassName="btn btn-primary">Make Request</Link>
+          <Link to="/" className="btn btn-default" activeClassName="btn btn-primary">Logout</Link>
         </div>
         {this.props.children}
       </div>
