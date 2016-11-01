@@ -35,10 +35,16 @@ class Browse extends Component {
       })
     });
   }
-  deleteTile(index) {
-    let newTiles = this.state.tileData;
-    newTiles.splice(index, 1);
-    this.setState({tileData: newTiles})
+
+  deleteTile(index, itemname) {
+    console.log("Browse.js deleteTile")
+    $.post('/deleteItem', { itemname: itemname })
+      .done((data) => {
+        let newTiles = this.state.tileData;
+        newTiles.splice(index, 1);
+        this.setState({ tileData: newTiles })
+      })
+      .fail(() => console.error('error with deleteItem'));
   }
 
   render() {
