@@ -26410,7 +26410,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -26430,66 +26430,138 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Start = function (_Component) {
-	  _inherits(Start, _Component);
+	    _inherits(Start, _Component);
 
-	  function Start() {
-	    _classCallCheck(this, Start);
+	    function Start() {
+	        _classCallCheck(this, Start);
 
-	    return _possibleConstructorReturn(this, (Start.__proto__ || Object.getPrototypeOf(Start)).apply(this, arguments));
-	  }
-
-	  _createClass(Start, [{
-	    key: 'getStatus',
-	    value: function getStatus() {
-	      console.log('this happens');
-	      var bloodOath = new Promise(function (resolve, reject) {
-	        FB.getLoginStatus(function (response) {
-	          statusChangeCallback(response);
-	          resolve(response);
-	        })();
-	      }).then(function (response) {
-	        console.log(response);
-	      });
+	        return _possibleConstructorReturn(this, (Start.__proto__ || Object.getPrototypeOf(Start)).apply(this, arguments));
 	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
 
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'start-container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'start-contents' },
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'Lendr'
-	          ),
-	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            'share stuff with your friends.'
-	          ),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('div', { className: 'fb-login-button', 'data-size': 'large', 'data-show-faces': 'false', 'data-auto-logout-link': 'true' }),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/login', className: 'btn btn-primary start-btn' },
-	            'Login'
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/signup', className: 'btn btn-primary start-btn' },
-	            'Signup'
-	          )
-	        )
-	      );
-	    }
-	  }]);
+	    _createClass(Start, [{
+	        key: 'Auth',
+	        value: function Auth() {
+	            console.log('jedsf');
+	            // This is called with the results from from FB.getLoginStatus().
+	            function statusChangeCallback(response) {
+	                console.log('statusChangeCallback');
+	                console.log(response);
+	                // The response object is returned with a status field that lets the
+	                // app know the current login status of the person.
+	                // Full docs on the response object can be found in the documentation
+	                // for FB.getLoginStatus().
+	                console.log(response, 'sdfsfsfsfs');
+	                if (response.status === 'connected') {
+	                    // Logged into your app and Facebook.
+	                    testAPI();
+	                } else if (response.status === 'not_authorized') {
+	                    // The person is logged into Facebook, but not your app.
+	                    document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+	                } else {
+	                    // The person is not logged into Facebook, so we're not sure if
+	                    // they are logged into this app or not.
+	                    document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+	                }
+	            }
 
-	  return Start;
+	            // This function is called when someone finishes with the Login
+	            // Button.  See the onlogin handler attached to it in the sample
+	            // code below.
+	            function checkLoginState() {
+	                FB.getLoginStatus(function (response) {
+	                    console.log(FB.getAuthResponse());
+	                    statusChangeCallback(response);
+	                });
+	            }
+
+	            window.fbAsyncInit = function () {
+	                FB.init({
+	                    appId: '1150277605062177',
+	                    cookie: true, // enable cookies to allow the server to access
+	                    // the session
+	                    status: true,
+	                    xfbml: false, // parse social plugins on this page
+	                    version: 'v2.5' // use graph api version 2.5
+	                });
+
+	                // Now that we've initialized the JavaScript SDK, we call
+	                // FB.getLoginStatus().  This function gets the state of the
+	                // person visiting this page and can return one of three states to
+	                // the callback you provide.  They can be:
+	                //
+	                // 1. Logged into your app ('connected')
+	                // 2. Logged into Facebook, but not your app ('not_authorized')
+	                // 3. Not logged into Facebook and can't tell if they are logged into
+	                //    your app or not.
+	                //
+	                // These three cases are handled in the callback function.
+
+	                FB.getLoginStatus(function (response) {
+	                    console.log(response);
+	                    statusChangeCallback(response);
+	                });
+	            };
+
+	            // Load the SDK asynchronously
+	            (function (d, s, id) {
+	                var js,
+	                    fjs = d.getElementsByTagName(s)[0];
+	                if (d.getElementById(id)) return;
+	                js = d.createElement(s);
+	                js.id = id;
+	                js.src = "//connect.facebook.net/en_US/sdk.js";
+	                fjs.parentNode.insertBefore(js, fjs);
+	            })(document, 'script', 'facebook-jssdk');
+
+	            // Here we run a very simple test of the Graph API after login is
+	            // successful.  See statusChangeCallback() for when this call is made.
+	            function testAPI() {
+	                console.log('Welcome!  Fetching your information.... ');
+	                FB.api('/me', function (response) {
+	                    console.log('Successful login for: ' + response.name);
+	                    document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'start-container' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'start-contents' },
+	                    _react2.default.createElement(
+	                        'h1',
+	                        null,
+	                        'Lendr'
+	                    ),
+	                    _react2.default.createElement(
+	                        'h3',
+	                        null,
+	                        'share stuff with your friends.'
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement('div', { onClick: this.Auth.bind(this), className: 'fb-login-button', 'data-size': 'large', 'data-show-faces': 'false', 'data-auto-logout-link': 'true' }),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/login', className: 'btn btn-primary start-btn' },
+	                        'Login'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/signup', className: 'btn btn-primary start-btn' },
+	                        'Signup'
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Start;
 	}(_react.Component);
 
 	exports.default = Start;
@@ -26877,6 +26949,13 @@
 	      });
 	    }
 	  }, {
+	    key: 'deleteTile',
+	    value: function deleteTile(index) {
+	      var newTiles = this.state.tileData;
+	      newTiles.splice(index, 1);
+	      this.setState({ tileData: newTiles });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      // Render only as many Tiles as there are data from our GET request
@@ -26885,6 +26964,7 @@
 
 	      for (var i = 0; i < len; i++) {
 	        tiles.push(_react2.default.createElement(_Tile2.default, {
+	          deleteTile: this.deleteTile.bind(this),
 	          tileId: i,
 	          passedState: this.state
 	        }));
@@ -27348,7 +27428,8 @@
 	              { className: 'back-child' },
 	              (0, _moment2.default)(tileData[tileId].datedue).format('MM/DD/YYYY')
 	            ),
-	            _react2.default.createElement(Borrow, { tileId: tileId })
+	            _react2.default.createElement(Borrow, { tileId: tileId }),
+	            _react2.default.createElement(Delete, { tileId: tileId, deleteTile: this.props.deleteTile.bind(this), tileData: this.props.passedState.tileData[tileId] })
 	          )
 	        )
 	      );
@@ -27371,7 +27452,7 @@
 	    key: 'borrowItem',
 	    value: function borrowItem() {
 	      console.log('Trying to borrow.');
-	      console.log(this.props);
+	      console.log("tileData", this.props.tileData.itemname);
 	    }
 	  }, {
 	    key: 'render',
@@ -27381,7 +27462,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'submit', className: 'btn btn-success', onClick: this.borrowItem.bind(this) },
+	          { type: 'submit', className: 'btn btn-borrow', onClick: this.borrowItem.bind(this) },
 	          'Borrow this'
 	        )
 	      );
@@ -27389,6 +27470,45 @@
 	  }]);
 
 	  return Borrow;
+	}(_react.Component);
+
+	var Delete = function (_Component3) {
+	  _inherits(Delete, _Component3);
+
+	  function Delete() {
+	    _classCallCheck(this, Delete);
+
+	    return _possibleConstructorReturn(this, (Delete.__proto__ || Object.getPrototypeOf(Delete)).apply(this, arguments));
+	  }
+
+	  _createClass(Delete, [{
+	    key: 'deleteItem',
+	    value: function deleteItem() {
+	      var _this4 = this;
+
+	      //  Delete item from DB
+	      $.post('/deleteItem', { itemname: this.props.tileData.itemname }).done(function (data) {
+	        _this4.props.deleteTile(_this4.props.tileId);
+	      }).fail(function () {
+	        return console.error('error with deleteItem');
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', className: 'btn btn-delete', onClick: this.deleteItem.bind(this) },
+	          'Delete this'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Delete;
 	}(_react.Component);
 
 	exports.default = Tile;

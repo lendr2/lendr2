@@ -26,7 +26,9 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))
 });
-
+app.post('/authenticate', (req,res) => {
+    if (req.body) console.log(req.body);
+});
 app.get('/client/stylesheets/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/stylesheets/styles.css'))
 });
