@@ -48,42 +48,17 @@ time, mark, audio, video {
   flex-direction: column;
 }
 
-.start h1 {
+.start h1,
+.home h1 {
   -webkit-text-stroke: 2px black;
   font-size: 100px;
 }
 
 /* Account component container */
-.account-container {
-  color: white;
-  font-family: Raleway;
-  background-image: url('http://localhost:3000/background.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: max;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
+
 
 /* Feed component container */
-.feed-container {
-  color: white;
-  font-family: Raleway;
-  background-image: url('http://localhost:3000/background.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: max;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
+
 .feed-header-container {
   display: flex;
   flex-wrap: wrap;

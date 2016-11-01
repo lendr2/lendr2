@@ -2,7 +2,7 @@ const sequelize = require('../database');
 const cookieParser = require('cookie-parser');
 const userSchema = require('../Models/user_model');
 const session = require('express-session')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 // creates the User table
 let User = sequelize.define('user', userSchema);
