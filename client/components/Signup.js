@@ -9,13 +9,14 @@ class Signup extends Component {
     // access username and password values
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
-    const location = event.target.elements[2].value + ', ' + event.target.elements[3].value;
+    const email = event.target.elements[2].value;
+    const location = event.target.elements[3].value + ', ' + event.target.elements[4].value;
 
     //////////////////////////////////
     // Post request to create new user
     // Redirects to signup page for invalid inputs
     // Maybe create error page 
-    $.post('/signup', { username: username, password: password, location: location, karma: 0 })
+    $.post('/signup', { username: username, password: password, email: email, location: location, karma: 0 })
       .done((data) => {
         browserHistory.push('/browse');
       })
@@ -35,6 +36,7 @@ class Signup extends Component {
         <form className="form-inline" onSubmit={this.createUser}>
           <input type="text" className="form-control" name="username" placeholder="username" /><br />
           <input type="password" className="form-control" name="password" placeholder="password" /><br />
+          <input type="text" className="form-control" name="email" placeholder="email" /><br />
           <input type="text" className="form-control" name="street" placeholder="street address" /><br />
           <input type="text" className="form-control" name="zipcode" placeholder="zip code" /><br />
           <button type="submit" className="btn btn-primary">Sign Up</button>
