@@ -4,18 +4,11 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 class Login extends Component {
 
   verifyUser(event) {
-    // need this
     event.preventDefault();
-
-    // access username and password values
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
 
-
-    //////////////////////////////////
-    // Post request to verify user
-    // Redirects to login page on invalid input
-    // Maybe create error page
+    // post request to verify user, redirects to login page on invalid input
     $.post('/login', { username: username, password: password })
       .done((data) => {
         browserHistory.push('/browse');
@@ -27,21 +20,21 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="start-container">
-        <h1>Lendr</h1>
-        <br />
-        <h3>share stuff with your friends.</h3>
-        <br />
-        <br />
-        <form className="form-inline" onSubmit={this.verifyUser}>
+      <div className="login-form">
+        <form onSubmit={this.verifyUser}>
           <div className="form-group">
-            Username: <input type="text" className="form-control" name="username" placeholder="username" /><br />
-          </div><br />
+            <label for="username">Username:</label>
+            <input type="text" className="form-control" name="username" placeholder="username" />
+          </div>
           <div className="form-group">
-            Password: <input type="password" className="form-control" name="password" placeholder="password" /><br />
-          </div><br />
-          <button type="submit" className="btn btn-success">Login</button>
-          <Link to="/" className="btn btn-primary start-btn">Back</Link>
+            <label for="password">Password:</label>
+            <input type="password" className="form-control" name="password" placeholder="password" />
+          </div>
+          <div className="checkbox">
+            <label><input type="checkbox" />Remember me</label>
+          </div>
+          <button type="submit" className="btn btn-primary">Login</button>
+          <Link to="/signup" className="btn btn-primary">Signup</Link>
         </form>
       </div>
     );

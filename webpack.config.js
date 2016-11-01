@@ -27,5 +27,12 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       }
     ]
+  },
+  resolve: {
+    modulesDirectories: [
+      'client',
+      'node_modules'
+    ],
+    extensions: ['', '.json', '.js', '.jsx']
   }
 }
