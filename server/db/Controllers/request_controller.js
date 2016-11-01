@@ -12,7 +12,7 @@ const requestController = {
     sequelize.sync({ logging: console.log }).then(() => {
       Request.create(req.body)
         .then(() => {
-          res.status(200).end();
+          next();
         })
         .catch((error) => {
           console.log('error:', errors);
