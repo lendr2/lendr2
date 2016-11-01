@@ -5,6 +5,7 @@ import { Router, Route, browserHistory, hashHistory, IndexRoute, IndexLink } fro
 ///////////////////////////////////
 import {
   Lendr,
+  Home,
   Start,
   Login,
   Signup,
@@ -29,17 +30,21 @@ render((
         <Route path="/signup" component={Signup} />
       </Route>
 
-      <Route path="/feed" component={Feed}>
+      <Route path="/home" component={Home}>
         <Route path="/browse" component={Browse} />
         <Route path="/requested" component={Requested} />
-      </Route>
-
-      <Route path="/account" component={Account}>
-      <Route path="/userInfo" component={UserInfo} />
-      <Route path="/upload" component={Upload} />
-      <Route path="/makeRequest" component={MakeRequest} />
-      <Route path="/wishlist" component={Wishlist} />
+        <Route path="/account" component={Account} />
       </Route>
     </Route>
   </Router>
 ), document.getElementById('app'))
+
+
+      // <Route path="/feed" component={Feed}>
+      // </Route>
+
+      // <Route path="/account" component={Account}>
+      // <Route path="/userInfo" component={UserInfo} />
+      // <Route path="/upload" component={Upload} />
+      // <Route path="/makeRequest" component={MakeRequest} />
+      // <Route path="/wishlist" component={Wishlist} />
