@@ -3,7 +3,7 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 
 class Signup extends Component {
   createUser(event) {
-    // need this
+    // prevent page refresh
     event.preventDefault();
 
     // access username and password values
@@ -26,13 +26,19 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
+      <div className="start-container">
+        <h1>Lendr</h1>
+        <br />
+        <h3>share stuff with your friends.</h3>
+        <br />
+        <br />
         <form className="form-inline" onSubmit={this.createUser}>
-          <input type="text" className="form-control" name="username" placeholder="username" />
-          <input type="password" className="form-control" name="password" placeholder="password" />
-          <input type="text" className="form-control" name="street" placeholder="street address" />
-          <input type="text" className="form-control" name="zipcode" placeholder="zip code" />
+          <input type="text" className="form-control" name="username" placeholder="username" /><br />
+          <input type="password" className="form-control" name="password" placeholder="password" /><br />
+          <input type="text" className="form-control" name="street" placeholder="street address" /><br />
+          <input type="text" className="form-control" name="zipcode" placeholder="zip code" /><br />
           <button type="submit" className="btn btn-primary">Sign Up</button>
+          <Link to="/" className="btn btn-primary start-btn">Back</Link>
         </form>
       </div>
     );

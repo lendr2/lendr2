@@ -20,10 +20,9 @@ import Karma from './components/Karma';
 //  React-router used to set up routes
 render((
   <Router history={browserHistory}>
-    <Route path="/" component={Start}>
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-    </Route>
+    <Route path="/" component={Start} />
+    <Route path="/login" component={Login} />
+    <Route path="/signup" component={Signup} />
     <Route path="/feed" component={Feed}>
       <Route path="/browse" component={Browse} />
       <Route path="/requested" component={Requested} />
