@@ -32,8 +32,9 @@ render((
 
       <Route path="/home" component={Home}>
         <Route path="/browse" component={Browse} />
+        <Route path="/upload" component={Upload}/>
         <Route path="/requested" component={Requested} />
-        <Route path="/account" component={Account} />
+        <Route path="/makeRequest" component={MakeRequest}/>
       </Route>
     </Route>
   </Router>

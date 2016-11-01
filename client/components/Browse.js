@@ -63,10 +63,8 @@ class Browse extends Component {
     }
 
     return (
-      <div className="browse-body">
-        <div className="tile-container">
-          {tiles}
-        </div>
+      <div className="browse">
+        {tiles}
       </div>
     );
   }
