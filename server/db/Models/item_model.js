@@ -25,6 +25,9 @@ itemSchema = {
     ownername: {
         type: Sequelize.STRING
     },
+    owneremail: {
+        type: Sequelize.STRING
+    },
     lendee: {
         type: Sequelize.STRING
     },
