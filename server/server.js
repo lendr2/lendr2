@@ -4,6 +4,8 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const request = require('request');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
 /////////////////////////////////////////
 // Import middleware here
 const { createUser, getUser } = require('./db/Controllers/user_controller');
@@ -20,7 +22,13 @@ const app = express();
 app.use(express.static(__dirname + './../client/img'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
+app.use(express.static(path.join(__dirname, '../client/components')));
 /////////////////////////////////////////
 // GET Requests
 app.get('/', (req, res) => {
@@ -36,7 +44,6 @@ app.get('/client/stylesheets/styles.css', (req, res) => {
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js'))
 });
-
 app.get('/browse', getAllItems);
 app.get('/requested', getOpenRequests);
 app.get('/wishlist', getWishlist);
@@ -44,12 +51,11 @@ app.get('/wishlist', getWishlist);
 /////////////////////////////////////////
 // POST Requests
 app.post('/signup', createUser);
-app.post('/login', getUser);
+app.post('/login', getUser)
 app.post('/uploadItem', createItem);
 app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
-
 
 
 app.listen(3000, () => {

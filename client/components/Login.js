@@ -18,6 +18,7 @@ class Login extends Component {
     // Maybe create error page
     $.post('/login', { username: username, password: password })
       .done((data) => {
+        console.log('pushing to browse');
         browserHistory.push('/browse');
       })
       .fail(() => {
@@ -41,7 +42,6 @@ class Login extends Component {
             Password: <input type="password" className="form-control" name="password" placeholder="password" /><br />
           </div><br />
           <button type="submit" className="btn btn-success">Login</button>
-          <Link to="/" className="btn btn-primary start-btn">Back</Link>
         </form>
       </div>
     );

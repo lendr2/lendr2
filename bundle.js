@@ -26439,91 +26439,6 @@
 	    }
 
 	    _createClass(Start, [{
-	        key: 'Auth',
-	        value: function Auth() {
-	            console.log('jedsf');
-	            // This is called with the results from from FB.getLoginStatus().
-	            function statusChangeCallback(response) {
-	                console.log('statusChangeCallback');
-	                console.log(response);
-	                // The response object is returned with a status field that lets the
-	                // app know the current login status of the person.
-	                // Full docs on the response object can be found in the documentation
-	                // for FB.getLoginStatus().
-	                console.log(response, 'sdfsfsfsfs');
-	                if (response.status === 'connected') {
-	                    // Logged into your app and Facebook.
-	                    testAPI();
-	                } else if (response.status === 'not_authorized') {
-	                    // The person is logged into Facebook, but not your app.
-	                    document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-	                } else {
-	                    // The person is not logged into Facebook, so we're not sure if
-	                    // they are logged into this app or not.
-	                    document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
-	                }
-	            }
-
-	            // This function is called when someone finishes with the Login
-	            // Button.  See the onlogin handler attached to it in the sample
-	            // code below.
-	            function checkLoginState() {
-	                FB.getLoginStatus(function (response) {
-	                    console.log(FB.getAuthResponse());
-	                    statusChangeCallback(response);
-	                });
-	            }
-
-	            window.fbAsyncInit = function () {
-	                FB.init({
-	                    appId: '1150277605062177',
-	                    cookie: true, // enable cookies to allow the server to access
-	                    // the session
-	                    status: true,
-	                    xfbml: false, // parse social plugins on this page
-	                    version: 'v2.5' // use graph api version 2.5
-	                });
-
-	                // Now that we've initialized the JavaScript SDK, we call
-	                // FB.getLoginStatus().  This function gets the state of the
-	                // person visiting this page and can return one of three states to
-	                // the callback you provide.  They can be:
-	                //
-	                // 1. Logged into your app ('connected')
-	                // 2. Logged into Facebook, but not your app ('not_authorized')
-	                // 3. Not logged into Facebook and can't tell if they are logged into
-	                //    your app or not.
-	                //
-	                // These three cases are handled in the callback function.
-
-	                FB.getLoginStatus(function (response) {
-	                    console.log(response);
-	                    statusChangeCallback(response);
-	                });
-	            };
-
-	            // Load the SDK asynchronously
-	            (function (d, s, id) {
-	                var js,
-	                    fjs = d.getElementsByTagName(s)[0];
-	                if (d.getElementById(id)) return;
-	                js = d.createElement(s);
-	                js.id = id;
-	                js.src = "//connect.facebook.net/en_US/sdk.js";
-	                fjs.parentNode.insertBefore(js, fjs);
-	            })(document, 'script', 'facebook-jssdk');
-
-	            // Here we run a very simple test of the Graph API after login is
-	            // successful.  See statusChangeCallback() for when this call is made.
-	            function testAPI() {
-	                console.log('Welcome!  Fetching your information.... ');
-	                FB.api('/me', function (response) {
-	                    console.log('Successful login for: ' + response.name);
-	                    document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
-	                });
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 
@@ -26545,7 +26460,6 @@
 	                    ),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement('div', { onClick: this.Auth.bind(this), className: 'fb-login-button', 'data-size': 'large', 'data-show-faces': 'false', 'data-auto-logout-link': 'true' }),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: '/login', className: 'btn btn-primary start-btn' },
@@ -26616,6 +26530,7 @@
 	      // Redirects to login page on invalid input
 	      // Maybe create error page
 	      $.post('/login', { username: username, password: password }).done(function (data) {
+	        console.log('pushing to browse');
 	        _reactRouter.browserHistory.push('/browse');
 	      }).fail(function () {
 	        _reactRouter.browserHistory.push('/');
@@ -26663,11 +26578,6 @@
 	            'button',
 	            { type: 'submit', className: 'btn btn-success' },
 	            'Login'
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/', className: 'btn btn-primary start-btn' },
-	            'Back'
 	          )
 	        )
 	      );
@@ -26723,13 +26633,14 @@
 	      // access username and password values
 	      var username = event.target.elements[0].value;
 	      var password = event.target.elements[1].value;
-	      var location = event.target.elements[2].value + ', ' + event.target.elements[3].value;
+	      var email = event.target.elements[2].value;
+	      var location = event.target.elements[3].value + ', ' + event.target.elements[4].value;
 
 	      //////////////////////////////////
 	      // Post request to create new user
 	      // Redirects to signup page for invalid inputs
 	      // Maybe create error page 
-	      $.post('/signup', { username: username, password: password, location: location, karma: 0 }).done(function (data) {
+	      $.post('/signup', { username: username, password: password, email: email, location: location, karma: 0 }).done(function (data) {
 	        _reactRouter.browserHistory.push('/browse');
 	      }).fail(function () {
 	        _reactRouter.browserHistory.push('/');
@@ -26760,6 +26671,8 @@
 	          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'username' }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'password' }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'email', placeholder: 'email' }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'street', placeholder: 'street address' }),
 	          _react2.default.createElement('br', null),
@@ -26950,10 +26863,17 @@
 	    }
 	  }, {
 	    key: 'deleteTile',
-	    value: function deleteTile(index) {
-	      var newTiles = this.state.tileData;
-	      newTiles.splice(index, 1);
-	      this.setState({ tileData: newTiles });
+	    value: function deleteTile(index, itemname) {
+	      var _this3 = this;
+
+	      console.log("Browse.js deleteTile");
+	      $.post('/deleteItem', { itemname: itemname }).done(function (data) {
+	        var newTiles = _this3.state.tileData;
+	        newTiles.splice(index, 1);
+	        _this3.setState({ tileData: newTiles });
+	      }).fail(function () {
+	        return console.error('error with deleteItem');
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -27350,14 +27270,10 @@
 	    value: function clickToFlip() {
 	      if (!this.props.passedState.isFlipped[this.props.tileId]) {
 	        this.props.passedState.isFlipped[this.props.tileId] = true;
-	        this.setState({
-	          isFlipped: this.props.passedState.isFlipped
-	        });
+	        this.setState({ isFlipped: this.props.passedState.isFlipped });
 	      } else {
 	        this.props.passedState.isFlipped[this.props.tileId] = false;
-	        this.setState({
-	          isFlipped: this.props.passedState.isFlipped
-	        });
+	        this.setState({ isFlipped: this.props.passedState.isFlipped });
 	      }
 	    }
 
@@ -27366,9 +27282,7 @@
 	  }, {
 	    key: 'handleOnFlip',
 	    value: function handleOnFlip(flipped) {
-	      if (flipped) {
-	        this.refs.backButton.getDOMNode().focus();
-	      }
+	      if (flipped) this.refs.backButton.getDOMNode().focus();
 	    }
 
 	    // Flips back most recent card on 'escape' press
@@ -27376,12 +27290,8 @@
 	  }, {
 	    key: 'handleKeyDown',
 	    value: function handleKeyDown(e) {
-	      if (this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 27) {
-	        this.clickToFlip();
-	      }
-	      if (!this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 13) {
-	        this.clickToFlip();
-	      }
+	      if (this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 27) this.clickToFlip();
+	      if (!this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 13) this.clickToFlip();
 	    }
 	  }, {
 	    key: 'render',
@@ -27428,7 +27338,7 @@
 	              { className: 'back-child' },
 	              (0, _moment2.default)(tileData[tileId].datedue).format('MM/DD/YYYY')
 	            ),
-	            _react2.default.createElement(Borrow, { tileId: tileId }),
+	            _react2.default.createElement(Borrow, { tileId: tileId, tileData: this.props.passedState.tileData }),
 	            _react2.default.createElement(Delete, { tileId: tileId, deleteTile: this.props.deleteTile.bind(this), tileData: this.props.passedState.tileData[tileId] })
 	          )
 	        )
@@ -27442,17 +27352,22 @@
 	var Borrow = function (_Component2) {
 	  _inherits(Borrow, _Component2);
 
-	  function Borrow() {
+	  function Borrow(_ref) {
+	    var tileData = _ref.tileData,
+	        tileId = _ref.tileId;
+
 	    _classCallCheck(this, Borrow);
 
-	    return _possibleConstructorReturn(this, (Borrow.__proto__ || Object.getPrototypeOf(Borrow)).apply(this, arguments));
+	    var _this2 = _possibleConstructorReturn(this, (Borrow.__proto__ || Object.getPrototypeOf(Borrow)).call(this, { tileData: tileData, tileId: tileId }));
+
+	    _this2.email = tileData[tileId].owneremail;
+	    return _this2;
 	  }
 
 	  _createClass(Borrow, [{
 	    key: 'borrowItem',
 	    value: function borrowItem() {
-	      console.log('Trying to borrow.');
-	      console.log("tileData", this.props.tileData.itemname);
+	      window.open('mailto:' + this.email);
 	    }
 	  }, {
 	    key: 'render',
@@ -27482,16 +27397,9 @@
 	  }
 
 	  _createClass(Delete, [{
-	    key: 'deleteItem',
-	    value: function deleteItem() {
-	      var _this4 = this;
-
-	      //  Delete item from DB
-	      $.post('/deleteItem', { itemname: this.props.tileData.itemname }).done(function (data) {
-	        _this4.props.deleteTile(_this4.props.tileId);
-	      }).fail(function () {
-	        return console.error('error with deleteItem');
-	      });
+	    key: 'localDeleteTile',
+	    value: function localDeleteTile() {
+	      this.props.deleteTile(this.props.tileData.tileId, this.props.tileData.itemname);
 	    }
 	  }, {
 	    key: 'render',
@@ -27501,7 +27409,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'submit', className: 'btn btn-delete', onClick: this.deleteItem.bind(this) },
+	          { type: 'submit', className: 'btn btn-delete', onClick: this.localDeleteTile.bind(this) },
 	          'Delete this'
 	        )
 	      );
@@ -42215,13 +42123,14 @@
 	      var description = event.target.elements[2].value;
 	      var imageURL = event.target.elements[3].value;
 	      var dueDate = event.target.elements[4].value;
+	      var owneremail = event.target.elements[5].value;
 	      var ownerName = document.cookie.split('=').pop();
 
 	      console.log(item, type, description, imageURL, dueDate);
 	      console.log(document.cookie.split('=').pop());
 
 	      //  Post new item to DB
-	      $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate, ownername: ownerName }).done(function (data) {
+	      $.post('/uploadItem', { itemname: item, itemtype: type, itemdescription: description, itempictureurl: imageURL, datedue: dueDate, ownername: ownerName, owneremail: owneremail }).done(function (data) {
 	        _reactRouter.browserHistory.push('/userInfo');
 	      }).fail(function () {
 	        return console.error('error with uploadItem');
@@ -42303,6 +42212,11 @@
 	            'div',
 	            null,
 	            _react2.default.createElement('input', { type: 'date', className: 'form-control', name: 'dueDate', placeholder: 'due date' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('input', { type: 'email', className: 'form-control', name: 'email', placeholder: 'email' })
 	          ),
 	          _react2.default.createElement(
 	            'div',

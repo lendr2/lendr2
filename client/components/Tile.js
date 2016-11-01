@@ -15,32 +15,21 @@ class Tile extends Component {
   clickToFlip() {
     if (!this.props.passedState.isFlipped[this.props.tileId]) {
       this.props.passedState.isFlipped[this.props.tileId] = true;
-      this.setState({
-        isFlipped: this.props.passedState.isFlipped
-      });
-    } else {
+      this.setState({ isFlipped: this.props.passedState.isFlipped });
+    }
+    else {
       this.props.passedState.isFlipped[this.props.tileId] = false;
-      this.setState({
-        isFlipped: this.props.passedState.isFlipped
-      });
+      this.setState({ isFlipped: this.props.passedState.isFlipped });
     }
   }
 
   // From react-flipcard library - don't remove 
-  handleOnFlip(flipped) {
-    if (flipped) {
-      this.refs.backButton.getDOMNode().focus();
-    }
-  }
+  handleOnFlip(flipped) { if (flipped) this.refs.backButton.getDOMNode().focus() }
 
   // Flips back most recent card on 'escape' press
   handleKeyDown(e) {
-    if (this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 27) {
-      this.clickToFlip();
-    }
-    if (!this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 13) {
-      this.clickToFlip();
-    }
+    if (this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 27) this.clickToFlip()
+    if (!this.props.passedState.isFlipped[this.props.tileId] && e.keyCode === 13) this.clickToFlip()
   }
 
   render() {
@@ -63,7 +52,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <Borrow tileId={tileId} />
+            <Borrow tileId={tileId} tileData={this.props.passedState.tileData} />
             <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
           </div>
         </FlipCard>
@@ -73,9 +62,13 @@ class Tile extends Component {
 }
 
 class Borrow extends Component {
+  constructor({tileData, tileId}) {
+    super({tileData, tileId});
+    this.email = tileData[tileId].owneremail;
+  }
+  
   borrowItem() {
-    console.log(`Trying to borrow.`);
-    console.log("tileData", this.props.tileData.itemname);
+    window.open('mailto:' + this.email);
   }
   render() {
     return (
@@ -87,18 +80,13 @@ class Borrow extends Component {
 }
 
 class Delete extends Component {
-  deleteItem() {
-    //  Delete item from DB
-    $.post('/deleteItem', { itemname: this.props.tileData.itemname })
-      .done((data) => {
-      this.props.deleteTile(this.props.tileId);
-    })
-    .fail(() => console.error('error with deleteItem'));
-  }
+
+  localDeleteTile() { this.props.deleteTile(this.props.tileData.tileId, this.props.tileData.itemname) }
+
   render() {
     return (
       <div>
-        <button type="submit" className="btn btn-delete" onClick={ this.deleteItem.bind(this) }>Delete this</button>
+        <button type="submit" className="btn btn-delete" onClick={ this.localDeleteTile.bind(this) }>Delete this</button>
       </div>
     );
   }
