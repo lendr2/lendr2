@@ -8,8 +8,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
     margin: 0;
@@ -24,7 +24,9 @@ time, mark, audio, video {
 h1 {
    -webkit-text-stroke: 2px black;
 }
-
+.center {
+  margin-left: 20px;
+}
 /* grid system */
 .flex-grid {
   display: flex;
@@ -41,7 +43,7 @@ h1 {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100vh;
-  width: max;  
+  width: max;
   padding: 0;
   margin: 0;
   display: flex;
@@ -71,7 +73,7 @@ h1 {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100vh;
-  width: max;  
+  width: max;
   padding: 0;
   margin: 0;
   display: flex;
@@ -87,7 +89,7 @@ h1 {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height: 100vh;
-  width: max;  
+  width: max;
   padding: 0;
   margin: 0;
   display: flex;
