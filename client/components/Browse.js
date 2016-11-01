@@ -35,7 +35,11 @@ class Browse extends Component {
       })
     });
   }
-
+  deleteTile(index) {
+    let newTiles = this.state.tileData;
+    newTiles.splice(index, 1);
+    this.setState({tileData: newTiles})
+  }
 
   render() {
     // Render only as many Tiles as there are data from our GET request
@@ -45,6 +49,7 @@ class Browse extends Component {
     for (let i = 0; i < len; i++) {
       tiles.push(
         <Tile
+          deleteTile={this.deleteTile.bind(this)}
           tileId={i}
           passedState={this.state}
           />

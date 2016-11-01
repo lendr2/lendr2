@@ -4,12 +4,12 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const request = require('request');
-
 /////////////////////////////////////////
 // Import middleware here
 const { createUser, getUser } = require('./db/Controllers/user_controller');
 const { createItem, getAllItems, getAllOwnerItems, getAllLendeeItems, deleteItem } = require('./db/Controllers/item_controller');
 const { createRequest, getWishlist, getOpenRequests, deleteRequest } = require('./db/Controllers/request_controller');
+const {isLoggedIn} = require('./db/Controllers/session_controller');
 
 /////////////////////////////////////////
 // Initialize your express server
@@ -44,6 +44,7 @@ app.get('/wishlist', getWishlist);
 app.post('/signup', createUser);
 app.post('/login', getUser);
 app.post('/uploadItem', createItem);
+app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
 
