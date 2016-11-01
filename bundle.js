@@ -26877,6 +26877,13 @@
 	      });
 	    }
 	  }, {
+	    key: 'deleteTile',
+	    value: function deleteTile(index) {
+	      var newTiles = this.state.tileData;
+	      newTiles.splice(index, 1);
+	      this.setState({ tileData: newTiles });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      // Render only as many Tiles as there are data from our GET request
@@ -26885,6 +26892,7 @@
 
 	      for (var i = 0; i < len; i++) {
 	        tiles.push(_react2.default.createElement(_Tile2.default, {
+	          deleteTile: this.deleteTile.bind(this),
 	          tileId: i,
 	          passedState: this.state
 	        }));
@@ -27348,7 +27356,8 @@
 	              { className: 'back-child' },
 	              (0, _moment2.default)(tileData[tileId].datedue).format('MM/DD/YYYY')
 	            ),
-	            _react2.default.createElement(Borrow, { tileId: tileId })
+	            _react2.default.createElement(Borrow, { tileId: tileId }),
+	            _react2.default.createElement(Delete, { tileId: tileId, deleteTile: this.props.deleteTile.bind(this), tileData: this.props.passedState.tileData[tileId] })
 	          )
 	        )
 	      );
@@ -27371,7 +27380,7 @@
 	    key: 'borrowItem',
 	    value: function borrowItem() {
 	      console.log('Trying to borrow.');
-	      console.log(this.props);
+	      console.log("tileData", this.props.tileData.itemname);
 	    }
 	  }, {
 	    key: 'render',
@@ -27381,7 +27390,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'submit', className: 'btn btn-success', onClick: this.borrowItem.bind(this) },
+	          { type: 'submit', className: 'btn btn-borrow', onClick: this.borrowItem.bind(this) },
 	          'Borrow this'
 	        )
 	      );
@@ -27389,6 +27398,45 @@
 	  }]);
 
 	  return Borrow;
+	}(_react.Component);
+
+	var Delete = function (_Component3) {
+	  _inherits(Delete, _Component3);
+
+	  function Delete() {
+	    _classCallCheck(this, Delete);
+
+	    return _possibleConstructorReturn(this, (Delete.__proto__ || Object.getPrototypeOf(Delete)).apply(this, arguments));
+	  }
+
+	  _createClass(Delete, [{
+	    key: 'deleteItem',
+	    value: function deleteItem() {
+	      var _this4 = this;
+
+	      //  Delete item from DB
+	      $.post('/deleteItem', { itemname: this.props.tileData.itemname }).done(function (data) {
+	        _this4.props.deleteTile(_this4.props.tileId);
+	      }).fail(function () {
+	        return console.error('error with deleteItem');
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit', className: 'btn btn-delete', onClick: this.deleteItem.bind(this) },
+	          'Delete this'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Delete;
 	}(_react.Component);
 
 	exports.default = Tile;
