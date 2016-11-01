@@ -63,7 +63,8 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <Borrow tileId={tileId}/>
+            <Borrow tileId={tileId} />
+            <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
           </div>
         </FlipCard>
       </div>
@@ -74,14 +75,33 @@ class Tile extends Component {
 class Borrow extends Component {
   borrowItem() {
     console.log(`Trying to borrow.`);
-    console.log(this.props);
+    console.log("tileData", this.props.tileData.itemname);
   }
   render() {
     return (
       <div>
-        <button type="submit" className="btn btn-success" onClick={ this.borrowItem.bind(this) }>Borrow this</button>
+        <button type="submit" className="btn btn-borrow" onClick={ this.borrowItem.bind(this) }>Borrow this</button>
       </div>
     );
   }
 }
+
+class Delete extends Component {
+  deleteItem() {
+    //  Delete item from DB
+    $.post('/deleteItem', { itemname: this.props.tileData.itemname })
+      .done((data) => {
+      this.props.deleteTile(this.props.tileId);
+    })
+    .fail(() => console.error('error with deleteItem'));
+  }
+  render() {
+    return (
+      <div>
+        <button type="submit" className="btn btn-delete" onClick={ this.deleteItem.bind(this) }>Delete this</button>
+      </div>
+    );
+  }
+}
+
 export default Tile;
