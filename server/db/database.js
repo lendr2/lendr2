@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-// setting up a sequel connection pool using postgres as the dialect 
+// setting up a sequel connection pool using postgres as the dialect
 
 //  Make sure to 'createdb lendrdb' in your Lendr repo folder to create initial database
 //  Set credentials below to your computer's username and password
