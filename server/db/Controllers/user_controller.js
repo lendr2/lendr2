@@ -40,7 +40,7 @@ let userController = {
         console.log('testing?');
         bcrypt.compare(req.body.password, user.dataValues.password, function(err, val) {
           console.log(val,'is this true?');
-          if (err || val === false) res.status(400).send('bad password');
+          if (err || val === false) res.status(400).send('incorrect username or password.');
           res.cookie('username', user.username);
           req.session.user = user.dataValues.username;
 
