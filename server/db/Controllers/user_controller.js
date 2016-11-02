@@ -1,7 +1,7 @@
 const sequelize = require('../database');
 const cookieParser = require('cookie-parser');
 const userSchema = require('../Models/user_model');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 const sessionSchema = require('../Models/sessions.js');
 
@@ -14,7 +14,7 @@ let userController = {
     //creates a user
     createUser: (req, res, next) => {
         bcrypt.genSalt(saltRounds, function(err, salt) {
-            bcrypt.hash(req.body.password, salt, function(err, hash) {
+            bcrypt.hash(req.body.password, salt, null, function(err, hash) {
                 // Store hash in your password DB.
                 req.body.password = hash;
                 res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1);
