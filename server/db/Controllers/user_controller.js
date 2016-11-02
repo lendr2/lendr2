@@ -1,7 +1,7 @@
 const sequelize = require('../database');
 const cookieParser = require('cookie-parser');
 const userSchema = require('../Models/user_model');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 const sessionSchema = require('../Models/sessions.js');
 
