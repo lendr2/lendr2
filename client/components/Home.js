@@ -9,12 +9,11 @@ class Home extends Component {
       tileData: [],
     }
     this.getData = this.getData.bind(this);
+    this.deleteTile = this.deleteTile.bind(this);
   }
 
   getData() {
-    $.get('/browse', (data) => {
-      return data;
-    }).done((data) => {
+    $.get('/browse').done(data => {
       const flipStatusArr = new Array(data.length).fill(false);
       this.setState({
         isFlipped: flipStatusArr,
@@ -23,23 +22,22 @@ class Home extends Component {
     });
   }
   
-  // deleteTile(index, itemname) {
-  //   console.log("Browse.js deleteTile")
-  //   $.post('/deleteItem', { itemname: itemname })
-  //     .done((data) => {
-  //       let newTiles = this.state.tileData;
-  //       newTiles.splice(index, 1);
-  //       this.setState({ tileData: newTiles })
-  //     })
-  //     .fail(() => console.error('error with deleteItem'));
-  // }
+  deleteTile(index, itemname) {
+    $.post('/deleteItem', { itemname: itemname })
+      .done((data) => {
+        let newTiles = this.state.tileData;
+        newTiles.splice(index, 1);
+        this.setState({ tileData: newTiles })
+      })
+      .fail(() => console.error('error with deleteItem'));
+  }
 
   render() {
     let children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
         state: this.state,
-        getData: this.getData
-        
+        getData: this.getData,
+        deleteTile: this.deleteTile
       });
     });
 

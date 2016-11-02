@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class Start extends Component {
   verifyUser(event) {
-    console.log('verifying');
     event.preventDefault();
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
 
     // post request to verify user, redirects to login page on invalid input
     $.post('/login', { username: username, password: password })
-      .done((data) => {
-        browserHistory.push('/home');
-      })
-      .fail(() => {
-        browserHistory.push('/');
-      })
+      .done(data => browserHistory.push('/home'))
+      .fail(err => browserHistory.push('/'));
   }
 
   createUser(event) {
@@ -27,13 +22,8 @@ class Start extends Component {
 
     // post request to create new user, redirects to signup page for invalid inputs
     $.post('/signup', { username: username, password: password, email: email, location: location, karma: 0 })
-      .done((data) => {
-        browserHistory.push('/');
-
-      })
-      .fail(() => {
-        browserHistory.push('/signup');
-      })
+      .done(data => browserHistory.push('/'))
+      .fail(err => browserHistory.push('/signup'));
   }
 
   render() {
@@ -41,7 +31,7 @@ class Start extends Component {
       return React.cloneElement(child, {
         verifyUser: this.verifyUser,
         createUser: this.createUser
-      })
+      });
     });
 
     return (

@@ -52,13 +52,13 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-
           </div>
         </FlipCard>
       </div>
     );
   }
 }
+        
             // <Borrow tileId={tileId} tileData={this.props.passedState.tileData} />
             // <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
 
