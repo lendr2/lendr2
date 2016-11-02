@@ -53,34 +53,13 @@ time, mark, audio, video {
   font-size: 100px;
 }
 
-/* Account component container */
-
-
-/* Feed component container */
-
-.feed-header-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;
-}
-.feed-navbar {
-  clear: all;
-  height: 20px;
-}
-
 /* Browse Component */
 .browse-body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: max;
   height: 100vh;
+  width: max;
 }
 .tile-container {
   display: flex;
@@ -88,7 +67,7 @@ time, mark, audio, video {
   align-content: flex-start;
   justify-content: center;
   flex-direction: row;
-  width: 1000px;
+  width: max;
   height: 100vh;
 }
 
