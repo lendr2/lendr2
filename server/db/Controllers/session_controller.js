@@ -9,18 +9,17 @@ module.exports = {
 
      if (!req.cookies.ssid){
        console.log('this happens?bad?');
-       res.redirect('/login');
-       res.end();
+       res.status(200).end();
      } else {
        var obj = {ssid:req.cookies.ssid, username:req.body.username};
        console.log(req.body)
        sequelize.sync().then(() => {
        sessions.create(obj)
        .then( () =>{
-          console.log('this works');
-          next();
+          res.status(200).end();
         })
        .catch( (error) => {
+         console.log('hits this shit -----------------------');
          console.log("Error in sessions.create", error);
          res.status(400).end();
        });

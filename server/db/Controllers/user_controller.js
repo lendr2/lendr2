@@ -17,14 +17,13 @@ let userController = {
             bcrypt.hash(req.body.password, salt, function(err, hash) {
                 // Store hash in your password DB.
                 req.body.password = hash;
-                console.log(req.body.password);
         sequelize.sync().then(() => {
-          console.log("req.cookies['connect.sid']", req.cookies['connect.sid'])
           res.cookie('ssid',Math.floor(Math.random() * 2132131231)+1);
-          console.log('req.cookies', req.cookies)
             User.create(req.body)
             .then((results) => { ssid: req.cookies.ssid })
-            .catch((error) => { res.status(400).end() });
+            .catch((error) => {
+              console.log('its gonna error');
+              res.status(400).end() });
         }).then(() => next());
       });
     });

@@ -28,7 +28,8 @@ class Start extends Component {
     // post request to create new user, redirects to signup page for invalid inputs
     $.post('/signup', { username: username, password: password, email: email, location: location, karma: 0 })
       .done((data) => {
-        browserHistory.push('/');
+        browserHistory.push('/login');
+
       })
       .fail(() => {
         browserHistory.push('/signup');
@@ -42,7 +43,7 @@ class Start extends Component {
         createUser: this.createUser
       })
     });
-    
+
     return (
       <div className="start">
         <h1>Lendr</h1>

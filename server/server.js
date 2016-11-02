@@ -37,9 +37,9 @@ app.use(session({
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))
 });
-app.post('/authenticate', (req,res) => {
-    if (req.body) console.log(req.body);
-});
+// app.post('/authenticate', (req,res) => {
+//     if (req.body) console.log(req.body);
+// });
 app.get('/client/stylesheets/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/stylesheets/styles.css'))
 });
@@ -60,7 +60,9 @@ app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
 
-
+app.get('*',(req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'))
+})
 app.listen(3000, () => {
   console.log('server up and running on 3000');
 });
