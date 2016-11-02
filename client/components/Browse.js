@@ -13,7 +13,7 @@ class Browse extends Component {
     for (let i = 0; i < length; i++) {
       tiles[i] = (
         <Tile 
-        // deleteTile = { this.deleteTile.bind(this) }
+          deleteTile={ this.props.deleteTile.bind(this) }
           tileId={i}
           passedState={this.props.state}
           />
