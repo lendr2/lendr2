@@ -55,7 +55,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <button onClick={this.props.deleteTile.bind(this, username, tileData, tileId)}>Delete</button>
+            <button style={{ display: username === ownername ? "inherit" : "none" }} onClick={this.props.deleteTile.bind(this, username, tileData, tileId)}>Delete</button>
           </div>
         </FlipCard>
       </div>

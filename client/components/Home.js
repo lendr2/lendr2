@@ -29,7 +29,7 @@ class Home extends Component {
       $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname })
         .done((data) => {
           let newTiles = this.state.tileData;
-          newTiles.splice(index, 1);
+          newTiles.splice(tileId, 1);
           this.setState({ tileData: newTiles })
         })
         .fail((error) => console.lof('error with deleteItem', error));
