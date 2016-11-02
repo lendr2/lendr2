@@ -5,13 +5,16 @@ class Login extends Component {
 
   verifyUser(event) {
     event.preventDefault();
+    const oreo = document.cookie.slice(document.cookie.indexOf("=")+1, document.cookie.indexOf(";"));
     const username = event.target.elements[0].value;
     const password = event.target.elements[1].value;
-
     // post request to verify user, redirects to login page on invalid input
-    $.post('/login', { username: username, password: password })
+    $.post('/login', { username: username, password: password, ssid: oreo  })
       .done((data) => {
-        browserHistory.push('/home');
+        console.log(data);
+        if (oreo ==== data.cookie)
+        if (data) browserHistory.push('/home');
+        else browserHistory.push('/');
       })
       .fail(() => {
         browserHistory.push('/');
@@ -19,6 +22,7 @@ class Login extends Component {
   }
 
   render() {
+
     return (
       <div className="login-form">
         <form onSubmit={this.verifyUser}>
