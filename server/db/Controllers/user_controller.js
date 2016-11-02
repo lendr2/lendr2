@@ -17,20 +17,16 @@ let userController = {
             bcrypt.hash(req.body.password, salt, function(err, hash) {
                 // Store hash in your password DB.
                 req.body.password = hash;
-                sequelize.sync().then(() => {
-                    res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1);
-                    User.create(req.body).then(results => {
-                        session.create({ssid: req.cookies.ssid, username:req.body.username})
-                        .then(results => res.status(200).send('stored'))
-                        .catch(error => res.status(400).end())
-                    }).catch((error) => {
-                        console.log('its gonna error');
-                        res.status(400).end()
-                    });
-                }).then(() => next());
+                res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1);
+                res.cookie('username', req.body.username);
+                });
             });
-        });
-    },
+        sequelize.sync().then( () => {
+             User.create(req.body).then(results => next())
+                                  .catch( error => res.status(400).end());
+          }).catch( () => res.status(400).send('error'));
+
+},
 
     //gets a user for validation on login
     getUser: (req, res, next) => {
@@ -42,7 +38,7 @@ let userController = {
             //user truthy
             if (user) {
                 res.cookie('username', user.username);
-                res.status(200).end()
+
             }
             //user falsy
             if (!user) {
