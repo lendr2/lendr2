@@ -26,7 +26,7 @@ class Upload extends Component {
       .done((data) => {
         browserHistory.push('/browse');
       })
-      .fail(() => console.error('error with uploadItem'));
+      .fail((err) => console.log(err));
   }
 
   render() {
@@ -55,7 +55,6 @@ class Upload extends Component {
             <textarea className="form-control" name="description" placeholder="description" />
           </div>
           <div className="form-group">
-              <input type="file" id="file"/>
             <input type="text" className="form-control" name="imageURL" placeholder="image URL" />
           </div>
           <div className="form-group">
