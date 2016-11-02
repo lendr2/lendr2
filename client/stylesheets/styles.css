@@ -58,7 +58,6 @@ time, mark, audio, video {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
   width: max;
 }
 .tile-container {
@@ -68,7 +67,6 @@ time, mark, audio, video {
   justify-content: center;
   flex-direction: row;
   width: max;
-  height: 100vh;
 }
 
 /* Card-Divs */

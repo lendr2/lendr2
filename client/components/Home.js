@@ -53,7 +53,7 @@ class Home extends Component {
           <Link to="/upload" className="btn btn-default" activeClassName="btn btn-primary">Upload</Link>
           <Link to="/requested" className="btn btn-default" activeClassName="btn btn-primary">Requested</Link>
           <Link to="/makeRequest" className="btn btn-default" activeClassName="btn btn-primary">Make Request</Link>
-          <Link to="/account" className="btn btn-default" activeClassName="btn btn-primary">Account</Link>
+          <Link to="/userInfo" className="btn btn-default" activeClassName="btn btn-primary">Transactions</Link>
           <Link to="/" className="btn btn-default" activeClassName="btn btn-primary">Logout</Link>
         </div>
         {children}

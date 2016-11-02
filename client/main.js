@@ -35,7 +35,7 @@ render((
         <Route path="/upload" component={Upload} />
         <Route path="/requested" component={Requested} />
         <Route path="/makeRequest" component={MakeRequest} />
-        <Route path="/account" component={Account} />
+        <Route path="/UserInfo" component={UserInfo} />
       </Route>
 
     </Route>
