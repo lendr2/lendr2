@@ -51,12 +51,12 @@ class Tile extends Component {
             <img className="front-card-img" src={this.props.passedState.tileData[this.props.tileId].itempictureurl}></img>
           </div>
           <div className="back-card">
-            <div className="back-child">{tileData[tileId].itemname}</div>
-            <div className="back-child">{tileData[tileId].itemdescription}</div>
-            <div className="back-child">{tileData[tileId].ownername}</div>
-            <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <div className="back-child">{tileData[tileId].lendee}</div>
-            <button style={{ display: username !== ownername ? "inherit" : "none" }} onClick={this.props.borrowItem.bind(this, username, tileData, tileId)}>Borrow</button>
+            <div className="back-child">Item: {tileData[tileId].itemname}</div>
+            <div className="back-child">Desc: {tileData[tileId].itemdescription}</div>
+            <div className="back-child">Owner: {tileData[tileId].ownername}</div>
+            <div className="back-child" style={{ display: !!tileData[tileId].lendee ? "inherit" : "none" }}>Lendee: {tileData[tileId].lendee}</div>
+            <div className="back-child">Date Due: {moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
+            <button style={{ display: username === ownername ? "none" : !!tileData[tileId].lendee ? "none" : "inherit" }} onClick={this.props.borrowItem.bind(this, username, tileData, tileId)}>Borrow</button>
             <button style={{ display: username === ownername ? "inherit" : "none" }} onClick={this.props.deleteItem.bind(this, username, tileData, tileId)}>Delete</button>
           </div>
         </FlipCard>
