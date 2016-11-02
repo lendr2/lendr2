@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
+const cookieParser = require('cookie-parser');
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
+      username: document.cookie.split("=").pop(),
       isFlipped: [],
       tileData: [],
     }
@@ -22,14 +24,16 @@ class Home extends Component {
     });
   }
   
-  deleteTile(index, itemname) {
-    $.post('/deleteItem', { itemname: itemname })
-      .done((data) => {
-        let newTiles = this.state.tileData;
-        newTiles.splice(index, 1);
-        this.setState({ tileData: newTiles })
-      })
-      .fail(() => console.error('error with deleteItem'));
+  deleteTile(username, tileData, tileId) {
+    if (username === tileData[tileId].ownername) {
+      $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname })
+        .done((data) => {
+          let newTiles = this.state.tileData;
+          newTiles.splice(tileId, 1);
+          this.setState({ tileData: newTiles })
+        })
+        .fail((error) => console.lof('error with deleteItem', error));
+    } else { console.log("Only the owner can delete an item.") }
   }
 
   render() {
