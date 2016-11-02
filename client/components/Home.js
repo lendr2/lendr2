@@ -11,7 +11,8 @@ class Home extends Component {
       tileData: [],
     }
     this.getData = this.getData.bind(this);
-    this.deleteTile = this.deleteTile.bind(this);
+    this.borrowItem = this.borrowItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   getData() {
@@ -23,8 +24,22 @@ class Home extends Component {
       });
     });
   }
-  
-  deleteTile(username, tileData, tileId) {
+
+  borrowItem(username, tileData, tileId) {
+    if (username !== tileData[tileId].ownername) {
+      console.log("Borrowing")
+      $.post('/borrowItem', { username: username, tileData: tileData[tileId] })
+        .done((data) => {
+          console.log("Borrow successful")
+          let newTiles = this.state.tileData;
+          newTiles[tileId].lendee = username;
+          this.setState({ tileData: newTiles })
+        })
+        .fail((error) => console.log('Error with borrowItem', error.responseText));
+    } else { console.log("The owner cannot borrow their own item.") }
+  }
+
+  deleteItem(username, tileData, tileId) {
     if (username === tileData[tileId].ownername) {
       $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname })
         .done((data) => {
@@ -41,7 +56,8 @@ class Home extends Component {
       return React.cloneElement(child, {
         state: this.state,
         getData: this.getData,
-        deleteTile: this.deleteTile
+        borrowItem: this.borrowItem,
+        deleteItem: this.deleteItem
       });
     });
 

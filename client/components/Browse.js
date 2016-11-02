@@ -12,8 +12,9 @@ class Browse extends Component {
     const length = this.props.state.tileData.length;
     for (let i = 0; i < length; i++) {
       tiles[i] = (
-        <Tile
-          deleteTile={this.props.deleteTile.bind(this)}
+        <Tile 
+          borrowItem={ this.props.borrowItem.bind(this) }
+          deleteItem={ this.props.deleteItem.bind(this) }
           tileId={i}
           passedState={this.props.state}
           />

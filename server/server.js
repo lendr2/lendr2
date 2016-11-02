@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const request = require('request');
 const session = require('express-session');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 /////////////////////////////////////////
 // Import middleware here
 const { createUser, getUser } = require('./db/Controllers/user_controller');
-const { createItem, getAllItems, getAllOwnerItems, getAllLendeeItems, deleteItem } = require('./db/Controllers/item_controller');
+const { createItem, getAllItems, getAllOwnerItems, getAllLendeeItems, borrowItem, deleteItem } = require('./db/Controllers/item_controller');
 const { createRequest, getWishlist, getOpenRequests, deleteRequest } = require('./db/Controllers/request_controller');
 const {isLoggedIn, checkSession} = require('./db/Controllers/session_controller');
 const {sessionSchema} = require('./db/Models/sessions.js');
@@ -56,6 +56,7 @@ app.get('/wishlist', getWishlist);
 app.post('/signup', createUser,isLoggedIn);
 app.post('/login', getUser, checkSession)
 app.post('/uploadItem', createItem);
+app.post('/borrowItem', borrowItem);
 app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
 app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
