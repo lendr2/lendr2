@@ -36,6 +36,7 @@ class Tile extends Component {
     let username = this.props.passedState.username;
     let tileId = this.props.tileId;
     let tileData = this.props.passedState.tileData;
+    let ownername = this.props.passedState.tileData[tileId].ownername;
     let itemname = this.props.passedState.tileData[tileId].itemname;
 
     return (
@@ -54,7 +55,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <button onClick={this.props.deleteTile.bind(this, username, tileId, itemname)}>Delete</button>
+            <button onClick={this.props.deleteTile.bind(this, username, tileData, tileId)}>Delete</button>
           </div>
         </FlipCard>
       </div>

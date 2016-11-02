@@ -26,7 +26,7 @@ class Upload extends Component {
       .done((data) => {
         browserHistory.push('/browse');
       })
-      .fail(() => console.error('error with uploadItem'));
+      .fail((error) => console.log('Error with uploadItem:', error));
   }
 
   render() {

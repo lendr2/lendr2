@@ -24,15 +24,16 @@ class Home extends Component {
     });
   }
   
-  deleteTile(username, index, itemname) {
-    $.post('/deleteItem', { username: username, itemname: itemname })
-      .done((data) => {
-        console.log("Home deleteTile, data is", data)
-        let newTiles = this.state.tileData;
-        newTiles.splice(index, 1);
-        this.setState({ tileData: newTiles })
-      })
-      .fail((error) => console.lof('error with deleteItem', error));
+  deleteTile(username, tileData, tileId) {
+    if (username === tileData[tileId].ownername) {
+      $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname })
+        .done((data) => {
+          let newTiles = this.state.tileData;
+          newTiles.splice(tileId, 1);
+          this.setState({ tileData: newTiles })
+        })
+        .fail((error) => console.lof('error with deleteItem', error));
+    } else { console.log("Only the owner can delete an item.") }
   }
 
   render() {
