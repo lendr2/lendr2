@@ -33,7 +33,7 @@ class Start extends Component {
         createUser: this.createUser
       });
     });
-    
+
     return (
       <div className="start">
         <h1>Lendr</h1>
