@@ -37,7 +37,6 @@ class Tile extends Component {
     let tileId = this.props.tileId;
     let tileData = this.props.passedState.tileData;
     let itemname = this.props.passedState.tileData[tileId].itemname;
-    console.log("Tile ownername is", tile.Data.ownername)
 
     return (
       <div className="item-tile" onClick={this.clickToFlip}>

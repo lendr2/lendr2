@@ -55,12 +55,12 @@ class Upload extends Component {
             <textarea className="form-control" name="description" placeholder="description" />
           </div>
           <div className="form-group">
-              <input type="file" id="file"/>
+            <label for="imageURL">Image URL:</label>
             <input type="text" className="form-control" name="imageURL" placeholder="image URL" />
           </div>
           <div className="form-group">
             <label for="duedate">Due Date:</label>
-            <input type="text" className="form-control" name="duedate" placeholder="due date" />
+            <input type="date" className="form-control" name="duedate" placeholder="due date" />
           </div>
           <div className="form-group">
             <label for="email">Email:</label>
