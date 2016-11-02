@@ -5,6 +5,7 @@ let sessions = sequelize.define('sessions', sessionSchema);
 module.exports = {
 
   isLoggedIn : (req,res,next) => {
+    console.log('HEREHERERHERHERe');
     console.log('req.cookies', req.cookies);
 
      if (!req.cookies.ssid){
@@ -16,7 +17,7 @@ module.exports = {
        sequelize.sync().then(() => {
        sessions.create(obj)
        .then( () =>{
-          res.status(200).end();
+          return res.status(200).end();
         })
        .catch( (error) => {
          console.log('hits this shit -----------------------');
