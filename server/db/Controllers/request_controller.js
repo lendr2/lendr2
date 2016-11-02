@@ -9,6 +9,7 @@ let Request = sequelize.define('request', requestSchema);
 const requestController = {
   //creates a request
   createRequest: (req, res, next) => {
+    console.log(req.body);
     sequelize.sync({ logging: console.log }).then(() => {
       Request.create(req.body)
         .then(() => {
