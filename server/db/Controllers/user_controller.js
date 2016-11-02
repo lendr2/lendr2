@@ -19,8 +19,10 @@ let userController = {
                 req.body.password = hash;
                 sequelize.sync().then(() => {
                     res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1);
-                    User.create(req.body).then((results) => {
-                        ssid : req.cookies.ssid
+                    User.create(req.body).then(results => {
+                        session.create({ssid: req.cookies.ssid, username:req.body.username})
+                        .then(results => res.status(200).send('stored'))
+                        .catch(error => res.status(400).end())
                     }).catch((error) => {
                         console.log('its gonna error');
                         res.status(400).end()
@@ -38,9 +40,9 @@ let userController = {
             }
         }).then((user) => {
             //user truthy
-            if (user){
-              res.cookie('username', user.username);
-              res.status(200).end()
+            if (user) {
+                res.cookie('username', user.username);
+                res.status(200).end()
             }
             //user falsy
             if (!user) {
