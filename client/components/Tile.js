@@ -33,8 +33,11 @@ class Tile extends Component {
   }
 
   render() {
-    let tileData = this.props.passedState.tileData;
+    let username = this.props.passedState.username;
     let tileId = this.props.tileId;
+    let tileData = this.props.passedState.tileData;
+    let itemname = this.props.passedState.tileData[tileId].itemname;
+    console.log("Tile ownername is", tile.Data.ownername)
 
     return (
       <div className="item-tile" onClick={this.clickToFlip}>
@@ -52,6 +55,7 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
+            <button onClick={this.props.deleteTile.bind(this, username, tileId, itemname)}>Delete</button>
           </div>
         </FlipCard>
       </div>
@@ -59,9 +63,8 @@ class Tile extends Component {
   }
 }
         
-            // <Borrow tileId={tileId} tileData={this.props.passedState.tileData} />
-            // <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
 
+            // <button tileId={tileId} onClick={this.props.passedState.tileData}>Borrow</button>
 // class Borrow extends Component {
 //   constructor({tileData, tileId}) {
 //     super({tileData, tileId});

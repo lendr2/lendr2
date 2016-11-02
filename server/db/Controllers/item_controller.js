@@ -63,7 +63,7 @@ let itemController = {
 
   //deletes an item
   deleteItem: (req, res, next) => {
-    Item.destroy({ where: { ownername: req.cookies.username, itemname: req.body.itemname } })
+    Item.destroy({ where: { ownername: req.body.username, itemname: req.body.itemname } })
       .then(() => {
       res.status(200).end();
       })

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
+const cookieParser = require('cookie-parser');
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
+      username: document.cookie.split("=").pop(),
       isFlipped: [],
       tileData: [],
     }
@@ -22,14 +24,15 @@ class Home extends Component {
     });
   }
   
-  deleteTile(index, itemname) {
-    $.post('/deleteItem', { itemname: itemname })
+  deleteTile(username, index, itemname) {
+    $.post('/deleteItem', { username: username, itemname: itemname })
       .done((data) => {
+        console.log("Home deleteTile, data is", data)
         let newTiles = this.state.tileData;
         newTiles.splice(index, 1);
         this.setState({ tileData: newTiles })
       })
-      .fail(() => console.error('error with deleteItem'));
+      .fail((error) => console.lof('error with deleteItem', error));
   }
 
   render() {
