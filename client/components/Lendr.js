@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route, Link, browserHistory } from 'react-router';
 
 class Lendr extends Component {
   render() {
