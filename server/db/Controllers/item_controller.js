@@ -4,11 +4,11 @@ const itemSchema = require('../Models/item_model');
 // creates the Item table
 let Item = sequelize.define('item', itemSchema);
 
-// defines all of the functions that will be executed on the Item table 
+// defines all of the functions that will be executed on the Item table
 let itemController = {
   // creates an item
   createItem: (req, res, next) => {
-    console.log('reqBPODDY', req.body)
+  console.log(req.body, '------------------------------------------------------');
     sequelize.sync({ logging: console.log }).then(() => {
       Item.create(req.body)
         .then(() => {
@@ -21,7 +21,7 @@ let itemController = {
     });
   },
 
-  // gets all items for the home browse page  
+  // gets all items for the home browse page
   getAllItems: (req, res, next) => {
     Item.findAll()
       .then((data) => {
@@ -72,6 +72,6 @@ let itemController = {
         res.status(400).end();
       });
   }
-}  
+}
 
 module.exports = itemController;
