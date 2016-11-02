@@ -52,8 +52,8 @@ const userController = {
                         req.session.user = user.dataValues.username;
                         res.cookie('username', user.username);
                         req.session.save(() => console.log('saving session'));
-                         (val === false) ?
-                        : next();
+                         if (val === false) res.status(400).send('no user')
+                         next();
                     })
                 }
                 }).catch(err => res.status(400).end());
