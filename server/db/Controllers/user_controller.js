@@ -53,7 +53,7 @@ const userController = {
                         res.cookie('username', user.username);
                         req.session.save(() => console.log('saving session'));
                          if (val === false) res.status(400).send('no user')
-                         next();
+                         else next();
                     })
                 }
                 }).catch(err => res.status(400).end());
