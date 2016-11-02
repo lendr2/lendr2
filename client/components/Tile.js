@@ -52,44 +52,45 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <Borrow tileId={tileId} tileData={this.props.passedState.tileData} />
-            <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
+
           </div>
         </FlipCard>
       </div>
     );
   }
 }
+            // <Borrow tileId={tileId} tileData={this.props.passedState.tileData} />
+            // <Delete tileId={tileId} deleteTile={this.props.deleteTile.bind(this)} tileData={this.props.passedState.tileData[tileId]} />
 
-class Borrow extends Component {
-  constructor({tileData, tileId}) {
-    super({tileData, tileId});
-    this.email = tileData[tileId].owneremail;
-  }
+// class Borrow extends Component {
+//   constructor({tileData, tileId}) {
+//     super({tileData, tileId});
+//     this.email = tileData[tileId].owneremail;
+//   }
   
-  borrowItem() {
-    window.open('mailto:' + this.email);
-  }
-  render() {
-    return (
-      <div>
-        <button type="submit" className="btn btn-borrow" onClick={ this.borrowItem.bind(this) }>Borrow this</button>
-      </div>
-    );
-  }
-}
+//   borrowItem() {
+//     window.open('mailto:' + this.email);
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <button type="submit" className="btn btn-borrow" onClick={ this.borrowItem.bind(this) }>Borrow this</button>
+//       </div>
+//     );
+//   }
+// }
 
-class Delete extends Component {
+// class Delete extends Component {
 
-  localDeleteTile() { this.props.deleteTile(this.props.tileData.tileId, this.props.tileData.itemname) }
+//   localDeleteTile() { this.props.deleteTile(this.props.tileData.tileId, this.props.tileData.itemname) }
 
-  render() {
-    return (
-      <div>
-        <button type="submit" className="btn btn-delete" onClick={ this.localDeleteTile.bind(this) }>Delete this</button>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <button type="submit" className="btn btn-delete" onClick={ this.localDeleteTile.bind(this) }>Delete this</button>
+//       </div>
+//     );
+//   }
+// }
 
 export default Tile;

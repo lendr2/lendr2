@@ -26,26 +26,17 @@ render((
     <Route component={Lendr}>
 
       <Route path="/" component={Start}>
-        <IndexRoute path="/login" component={Login} />
+        <IndexRoute component={Login} />
         <Route path="/signup" component={Signup} />
       </Route>
 
       <Route path="/home" component={Home}>
         <Route path="/browse" component={Browse} />
-        <Route path="/upload" component={Upload}/>
+        <Route path="/upload" component={Upload} />
         <Route path="/requested" component={Requested} />
-        <Route path="/makeRequest" component={MakeRequest}/>
+        <Route path="/makeRequest" component={MakeRequest} />
       </Route>
+
     </Route>
   </Router>
 ), document.getElementById('app'))
-
-
-      // <Route path="/feed" component={Feed}>
-      // </Route>
-
-      // <Route path="/account" component={Account}>
-      // <Route path="/userInfo" component={UserInfo} />
-      // <Route path="/upload" component={Upload} />
-      // <Route path="/makeRequest" component={MakeRequest} />
-      // <Route path="/wishlist" component={Wishlist} />

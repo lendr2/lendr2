@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router';
 const cookieParser = require('cookie-parser');
 
-class MakeRequest extends Component {
-  makeReq(event) {
-    event.preventDefault();
 
-    // get relevant data
+class MakeRequest extends Component {
+  makeRequest(event) {
+    event.preventDefault();
     const title = event.target.elements[0].value;
     const note = event.target.elements[1].value;
     const lendeename = document.cookie.split('=').pop();
@@ -22,11 +21,17 @@ class MakeRequest extends Component {
 
   render() {
     return (
-      <div>
-        <form className="form-inline" onSubmit={this.makeReq}>
-          <div><input type="text" className="form-control" name="title" placeholder="title" /></div>
-          <div><textarea rows="4" cols="50" className="form-control" name="note" placeholder="place a note here.." /></div>
-          <div><button type="submit" className="btn btn-primary">Submit</button></div>
+      <div className="makeRequest-form">
+        <form onSubmit={this.makeReq}>
+          <div className="form-group">
+            <label for="title">Title:</label>
+            <input type="text" className="form-control" name="title" placeholder="title" />
+          </div>
+          <div className="form-group">
+            <label for="description">Description:</label>
+            <textarea className="form-control" name="description" placeholder="place a note here..." />
+          </div>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>
     );
