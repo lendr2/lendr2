@@ -55,7 +55,9 @@ class Tile extends Component {
             <div className="back-child">{tileData[tileId].itemdescription}</div>
             <div className="back-child">{tileData[tileId].ownername}</div>
             <div className="back-child">{moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <button style={{ display: username === ownername ? "inherit" : "none" }} onClick={this.props.deleteTile.bind(this, username, tileData, tileId)}>Delete</button>
+            <div className="back-child">{tileData[tileId].lendee}</div>
+            <button style={{ display: username !== ownername ? "inherit" : "none" }} onClick={this.props.borrowItem.bind(this, username, tileData, tileId)}>Borrow</button>
+            <button style={{ display: username === ownername ? "inherit" : "none" }} onClick={this.props.deleteItem.bind(this, username, tileData, tileId)}>Delete</button>
           </div>
         </FlipCard>
       </div>
@@ -64,7 +66,6 @@ class Tile extends Component {
 }
         
 
-            // <button tileId={tileId} onClick={this.props.passedState.tileData}>Borrow</button>
 // class Borrow extends Component {
 //   constructor({tileData, tileId}) {
 //     super({tileData, tileId});
