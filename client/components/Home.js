@@ -27,13 +27,15 @@ class Home extends Component {
 
   borrowItem(username, tileData, tileId) {
     if (username !== tileData[tileId].ownername) {
-      $.post('/borrowItem', { username: username, itemname: tileData[tileId].itemname })
+      console.log("Borrowing")
+      $.post('/borrowItem', { username: username, tileData: tileData[tileId] })
         .done((data) => {
+          console.log("Borrow successful")
           let newTiles = this.state.tileData;
           newTiles[tileId].lendee = username;
           this.setState({ tileData: newTiles })
         })
-        .fail((error) => console.lof('error with borrowItem', error));
+        .fail((error) => console.log('Error with borrowItem', error.responseText));
     } else { console.log("The owner cannot borrow their own item.") }
   }
 

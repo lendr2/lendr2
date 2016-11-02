@@ -62,11 +62,13 @@ let itemController = {
   },
   //requests to borrow an item
   borrowItem: (req, res, next) => {
-    Item.find({ itemname: req.body.itemname })
-      .on('success', function (item) {
-        // Check if record exists in db
-        if (item) { item.updateAttributes({ lendee: req.body.username }).then(() => { res.status(200).end() }) }
-      })
+    if (req.body.username !== req.body.tileData.ownername) {
+      Item.find({ itemname: req.body.itemname })
+        .then((item) => {
+          // Check if record exists in db
+          if (item) { item.updateAttributes({ lendee: req.body.username }).then(() => { res.status(200).end() }) }
+        })
+    } else { console.log(`${req.body.tileData.ownername} attempted to borrow his/her own item (${req.body.tileData.itemname}).`) }
   },
   //deletes an item
   deleteItem: (req, res, next) => {
