@@ -12,8 +12,8 @@ class Browse extends Component {
     const length = this.props.state.tileData.length;
     for (let i = 0; i < length; i++) {
       tiles[i] = (
-        <Tile 
-          deleteTile={ this.props.deleteTile.bind(this) }
+        <Tile
+          deleteTile={this.props.deleteTile.bind(this)}
           tileId={i}
           passedState={this.props.state}
           />
@@ -21,8 +21,10 @@ class Browse extends Component {
     }
 
     return (
-      <div className="browse">
-        {tiles}
+      <div className="browse-body">
+        <div className="tile-container">
+          {tiles}
+        </div>  
       </div>
     );
   }
