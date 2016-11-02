@@ -8,7 +8,7 @@ let Item = sequelize.define('item', itemSchema);
 let itemController = {
   // creates an item
   createItem: (req, res, next) => {
-  console.log(req.body, '------------------------------------------------------');
+    console.log(req.body, '------------------------------------------------------');
     sequelize.sync({ logging: console.log }).then(() => {
       Item.create(req.body)
         .then(() => {
@@ -60,13 +60,18 @@ let itemController = {
         res.status(400).end();
       });
   },
-
+  //requests to borrow an item
+  borrowItem: (req, res, next) => {
+    Item.find({ itemname: req.body.itemname })
+      .on('success', function (item) {
+        // Check if record exists in db
+        if (item) { item.updateAttributes({ wantToBorrow: req.body.username }).then(() => { res.status(200).end() }) }
+      })
+  },
   //deletes an item
   deleteItem: (req, res, next) => {
     Item.destroy({ where: { ownername: req.body.username, itemname: req.body.itemname } })
-      .then(() => {
-      res.status(200).end();
-      })
+      .then(() => { res.status(200).end() })
       .catch((error) => {
         console.log('error:', error)
         res.status(400).end();

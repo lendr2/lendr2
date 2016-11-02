@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 
 //  Make sure to 'createdb lendrdb' in your Lendr repo folder to create initial database
 //  Set credentials below to your computer's username and password
-const sequelize = new Sequelize('bskwgenz', 'bskwgenz', '8j5eV5zrRwS0q0IdAQotUvy8WRT9w333', {
+const sequelize = new Sequelize('mxtigtyr', 'mxtigtyr', 'XXX-4221cEj6_26wzIhYK8fMMmdqzliz', {
  host: 'elmer-02.db.elephantsql.com',
  dialect: 'postgres'
 });
