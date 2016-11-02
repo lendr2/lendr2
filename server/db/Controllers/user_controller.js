@@ -15,7 +15,7 @@ const userController = {
   createUser: (req, res, next) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
       //ed add null here
-      bcrypt.hash(req.body.password, salt, function (err, hash) {
+      bcrypt.hash(req.body.password, salt, null, function (err, hash) {
         req.body.password = hash;// Store hash in your password DB.
         res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1); //Generate cookie
         res.cookie('username', req.body.username); //generate username cookie
@@ -25,7 +25,9 @@ const userController = {
       User.create(req.body).then(results => next())
         .catch(error => res.status(400).end());
     }).catch(() => res.status(400).send('error'));
+
   },
+
   //gets a user for validation on login
   getUser: (req, res, next) => {
     sessions.find({
@@ -50,7 +52,8 @@ const userController = {
               req.session.user = user.dataValues.username;
               res.cookie('username', user.username);
               req.session.save(() => console.log('saving session'));
-              if (val === false) res.status(400).send('no user');
+              if (val === false) res.status(400).send('no user')
+              else next();
             })
           }
         }).catch(err => res.status(400).end());
