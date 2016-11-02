@@ -6,19 +6,19 @@ const saltRounds = 10;
 const sessionSchema = require('../Models/sessions.js');
 
 // creates the User table
-let User = sequelize.define('user', userSchema);
-let sessions = sequelize.define('sessions', sessionSchema);
+const User = sequelize.define('user', userSchema);
+const sessions = sequelize.define('sessions', sessionSchema);
 
 // defines all of the funtions that will be executed on the User table
-let userController = {
+const userController = {
     //creates a user
     createUser: (req, res, next) => {
         bcrypt.genSalt(saltRounds, function(err, salt) {
-            bcrypt.hash(req.body.password, salt, null, function(err, hash) {
-                // Store hash in your password DB.
-                req.body.password = hash;
-                res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1);
-                res.cookie('username', req.body.username);
+            //ed add null here
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
+                req.body.password = hash;// Store hash in your password DB.
+                res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1); //Generate cookie
+                res.cookie('username', req.body.username); //generate username cookie
                 });
             });
         sequelize.sync().then( () => {
@@ -34,12 +34,10 @@ let userController = {
             where: {
                 ssid: req.body.ssid
             }
-        }).then((user) => {
+        }).then( user => {
             //user truthy
-            if (user) {
-                res.cookie('username', user.username);
+            if (user) res.cookie('username', user.username);
 
-            }
             //user falsy
             if (!user) {
                 User.findOne({
@@ -47,24 +45,20 @@ let userController = {
                         username: req.body.username
                     }
                 }).then( user => {
-                    if (!user) res.status(400).send('no user is the db')
-                    if (user){bcrypt.compare(req.body.password, user.dataValues.password, function(err, val) {
-                        if (err || val === false)
-                            res.status(400).send('incorrect username or password.');
+
+                    if (!user) return res.status(400).send('no user is the db')
+                    if (user){
+                        bcrypt.compare(req.body.password, user.dataValues.password, (err, val) => {
                         req.session.user = user.dataValues.username;
                         res.cookie('username', user.username);
                         req.session.save(() => console.log('saving session'));
-                        next();
+                         (val === false) ?
+                        : next();
                     })
                 }
-                }).catch(err => {
-                    console.log(err);
-                    res.status(400).end();
-                })
+                }).catch(err => res.status(400).end());
             }
-        }).catch((err) => {
-            res.status(400).send(err);
-        })
+        }).catch( err => res.status(400).send(err))
     }
 
 }
