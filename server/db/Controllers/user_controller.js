@@ -32,7 +32,10 @@ let userController = {
   //gets a user for validation on login
   getUser: (req, res, next) => {
     sessions.find({where : {ssid: req.body.ssid}})
-    .then((user) => res.status(200).end())
+    .then((user) =>{
+      res.cookie('username',user.username);
+      res.status(200).end()
+    })
     .catch((err) => {
     User.findOne({ where: { username: req.body.username } })
       .then((user) => {
@@ -40,6 +43,7 @@ let userController = {
         bcrypt.compare(req.body.password, user.dataValues.password, function(err, val) {
           if (err || val === false) res.status(400).send('incorrect username or password.');
           req.session.user = user.dataValues.username;
+          res.cookie('username',user.username);
           req.session.save(() => console.log('saving session'));
           next();
           })
