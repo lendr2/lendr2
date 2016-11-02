@@ -46,8 +46,9 @@ let userController = {
                     where: {
                         username: req.body.username
                     }
-                }).then(user => {
-                    bcrypt.compare(req.body.password, user.dataValues.password, function(err, val) {
+                }).then( user => {
+                    if (!user) res.status(400).send('no user is the db')
+                    if (user){bcrypt.compare(req.body.password, user.dataValues.password, function(err, val) {
                         if (err || val === false)
                             res.status(400).send('incorrect username or password.');
                         req.session.user = user.dataValues.username;
@@ -55,6 +56,7 @@ let userController = {
                         req.session.save(() => console.log('saving session'));
                         next();
                     })
+                }
                 }).catch(err => {
                     console.log(err);
                     res.status(400).end();
