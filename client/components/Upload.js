@@ -55,7 +55,7 @@ class Upload extends Component {
             <textarea className="form-control" name="description" placeholder="description" />
           </div>
           <div className="form-group">
-            <label for="imageURL">Image URL:</label>
+              <input type="file" id="file"/>
             <input type="text" className="form-control" name="imageURL" placeholder="image URL" />
           </div>
           <div className="form-group">
