@@ -29,9 +29,9 @@ class Home extends Component {
     if (username !== tileData[tileId].ownername) {
       $.post('/borrowItem', { username: username, itemname: tileData[tileId].itemname })
         .done((data) => {
-          // let newTiles = this.state.tileData;
-          // newTiles.splice(tileId, 1);
-          // this.setState({ tileData: newTiles })
+          let newTiles = this.state.tileData;
+          newTiles[tileId].lendee = username;
+          this.setState({ tileData: newTiles })
         })
         .fail((error) => console.lof('error with borrowItem', error));
     } else { console.log("The owner cannot borrow their own item.") }
@@ -54,7 +54,8 @@ class Home extends Component {
       return React.cloneElement(child, {
         state: this.state,
         getData: this.getData,
-        deleteTile: this.deleteTile
+        borrowItem: this.borrowItem,
+        deleteItem: this.deleteItem
       });
     });
 

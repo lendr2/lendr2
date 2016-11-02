@@ -65,7 +65,7 @@ let itemController = {
     Item.find({ itemname: req.body.itemname })
       .on('success', function (item) {
         // Check if record exists in db
-        if (item) { item.updateAttributes({ wantToBorrow: req.body.username }).then(() => { res.status(200).end() }) }
+        if (item) { item.updateAttributes({ lendee: req.body.username }).then(() => { res.status(200).end() }) }
       })
   },
   //deletes an item
