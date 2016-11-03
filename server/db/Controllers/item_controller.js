@@ -26,7 +26,7 @@ let itemController = {
     Item.findAll()
       .then((data) => {
         res.status(200);
-        res.send(data);
+        res.send(data.sort());
       })
       .catch((error) => {
         console.log('error:', error)
