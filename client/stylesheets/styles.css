@@ -35,6 +35,12 @@ time, mark, audio, video {
   width: 150px;
 }
 
+li {
+  margin-top: 5px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
 .lendr {
   color: white;
   font-family: Raleway;
