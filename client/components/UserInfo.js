@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
+import FlipCard from 'react-flipcard';
+import Tile from './Tile';
 
-//  To be completed...
-class UserInfo extends Component {
+class Browse extends Component {
+  componentDidMount() {
+    this.props.getData();
+  }
+
   render() {
+    const tiles = [];
+    const length = this.props.state.tileData.length;
+    for (let i = 0; i < length; i++) {
+      tiles[i] = (
+        <Tile 
+          borrowItem={ this.props.borrowItem.bind(this) }
+          deleteItem={ this.props.deleteItem.bind(this) }
+          tileId={i}
+          passedState={this.props.state}
+          />
+      )
+    }
+    const tilesLent = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].ownername && !!this.props.state.tileData[t.props.tileId].ownername})
+    const tilesBorrowed = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].lendee })
+    
     return (
       <div>
-        <br/>
+        <br />
         <div className="flex-grid">
-          <div className="col">Stuff I Lent</div>
-          <div className="col">Stuff I Borrow</div>
+          <div className="col">Stuff I Lent {tilesLent}</div>
+          <div className="col">Stuff I Borrowed {tilesBorrowed}</div>
         </div>
       </div>
     );
   }
 }
 
-export default UserInfo;
+export default Browse;
