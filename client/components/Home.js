@@ -13,6 +13,7 @@ class Home extends Component {
     this.getData = this.getData.bind(this);
     this.borrowItem = this.borrowItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.removeCookies = this.removeCookies.bind(this);
   }
 
   getData() {
@@ -50,6 +51,9 @@ class Home extends Component {
         .fail((error) => console.lof('error with deleteItem', error));
     } else { console.log("Only the owner can delete an item.") }
   }
+  removeCookies(){
+     document.cookie = 'username' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
 
   render() {
     let children = React.Children.map(this.props.children, child => {
@@ -70,7 +74,7 @@ class Home extends Component {
           <Link to="/requested" className="btn btn-default" activeClassName="btn btn-primary">Requested</Link>
           <Link to="/makeRequest" className="btn btn-default" activeClassName="btn btn-primary">Make Request</Link>
           <Link to="/userInfo" className="btn btn-default" activeClassName="btn btn-primary">Transactions</Link>
-          <Link to="/" className="btn btn-default" activeClassName="btn btn-primary">Logout</Link>
+          <Link to="/" onClick={this.removeCookies} className="btn btn-default" activeClassName="btn btn-primary">Logout</Link>
         </div>
         {children}
       </div>
