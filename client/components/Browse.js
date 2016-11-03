@@ -8,6 +8,7 @@ class Browse extends Component {
   }
 
   render() {
+    console.log("Browse Username is", this.props.state.username)
     const tiles = [];
     const length = this.props.state.tileData.length;
     for (let i = 0; i < length; i++) {

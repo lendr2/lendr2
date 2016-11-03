@@ -5,7 +5,6 @@ import moment from 'moment';
 class Tile extends Component {
   constructor(props) {
     super(props);
-
     // Need to bind methods to this specific component in order to work
     this.clickToFlip = this.clickToFlip.bind(this);
     this.handleOnFlip = this.handleOnFlip.bind(this);

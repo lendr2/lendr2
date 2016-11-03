@@ -14,6 +14,7 @@ class Home extends Component {
     this.borrowItem = this.borrowItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.removeCookies = this.removeCookies.bind(this);
+    console.log("Home Username is", this.state.username)
   }
 
   getData() {
@@ -27,28 +28,29 @@ class Home extends Component {
   }
 
   borrowItem(username, tileData, tileId) {
+    console.log(`Home borrowItem: username is ${username} and ownername is ${tileData[tileId].ownername}`)
     if (username !== tileData[tileId].ownername) {
       console.log("Borrowing")
       $.post('/borrowItem', { username: username, tileData: tileData[tileId] })
-        .done((data) => {
+        .then((data) => {
           console.log("Borrow successful")
-          let newTiles = this.state.tileData;
-          newTiles[tileId].lendee = username;
-          this.setState({ tileData: newTiles })
+          // let newTiles = this.state.tileData;
+          // newTiles[tileId].lendee = username;
+          // this.setState({ tileData: newTiles })
         })
-        .fail((error) => console.log('Error with borrowItem', error.responseText));
+        .catch((error) => console.log('Error with borrowItem', error.responseText));
     } else { console.log("The owner cannot borrow their own item.") }
   }
 
   deleteItem(username, tileData, tileId) {
     if (username === tileData[tileId].ownername) {
       $.post('/deleteItem', { username: username, itemname: tileData[tileId].itemname })
-        .done((data) => {
-          let newTiles = this.state.tileData;
-          newTiles.splice(tileId, 1);
-          this.setState({ tileData: newTiles })
+        .then((data) => {
+          // let newTiles = this.state.tileData;
+          // newTiles.splice(tileId, 1);
+          // this.setState({ tileData: newTiles })
         })
-        .fail((error) => console.lof('error with deleteItem', error));
+        .catch((error) => console.log('error with deleteItem', error));
     } else { console.log("Only the owner can delete an item.") }
   }
   removeCookies(){
@@ -58,6 +60,7 @@ class Home extends Component {
   render() {
     let children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
+        username: this.state.username,
         state: this.state,
         getData: this.getData,
         borrowItem: this.borrowItem,
