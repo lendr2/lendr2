@@ -59,7 +59,7 @@ app.post('/uploadItem', createItem);
 app.post('/borrowItem', borrowItem);
 app.post('/deleteItem', deleteItem);
 app.post('/makeRequest', createRequest);
-app.post('/userInfo', getAllOwnerItems, getAllLendeeItems);
+app.post('/userInfo', getAllItems);
 
 app.get('*',(req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'))

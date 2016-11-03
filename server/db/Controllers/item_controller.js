@@ -62,12 +62,10 @@ let itemController = {
   },
   //requests to borrow an item
   borrowItem: (req, res, next) => {
-    if (req.body.username !== req.body.tileData.ownername || !!req.body.tileData.lendee) {
-      Item.find({ itemname: req.body.itemname })
-        .then((item) => {
-          // Check if record exists in db
-          if (item) { item.updateAttributes({ lendee: req.body.username }).then(() => { res.status(200).end() }) }
-        })
+    console.log(`-------------item_controller borrowItem: username is ${req.body.username} and ownername is ${req.body.tileData.ownername}`)
+    if (!req.body.tileData.lendee && req.body.username !== req.body.tileData.ownername) {
+      Item.update({ lendee: req.body.username }, { where: {itemname: req.body.tileData.itemname } })
+        .then(() => { res.status(200).end() })
     } else { console.log(`${req.body.username} attempted to borrow (${req.body.tileData.itemname}).`) }
   },
   //deletes an item

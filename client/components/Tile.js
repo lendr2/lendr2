@@ -5,7 +5,6 @@ import moment from 'moment';
 class Tile extends Component {
   constructor(props) {
     super(props);
-
     // Need to bind methods to this specific component in order to work
     this.clickToFlip = this.clickToFlip.bind(this);
     this.handleOnFlip = this.handleOnFlip.bind(this);
@@ -56,10 +55,10 @@ class Tile extends Component {
             <div className="back-child">Owner: {tileData[tileId].ownername}</div>
             <div className="back-child" style={{ display: !!tileData[tileId].lendee ? "inherit" : "none" }}>Lendee: {tileData[tileId].lendee}</div>
             <div className="back-child">Date Due: {moment(tileData[tileId].datedue).format('MM/DD/YYYY')}</div>
-            <div>{username !== ownername ? "" : !!tileData[tileId].lendee ? "LENT" : ""}</div>
-            <div>{username === tileData[tileId].lendee ? "YOU ARE BORROWING THIS" : ""}</div>
-            <button style={{ display: username === ownername ? "none" : !!tileData[tileId].lendee ? "none" : "inherit" }} onClick={this.props.borrowItem.bind(this, username, tileData, tileId)}>Borrow</button>
-            <button style={{ display: username === ownername ? "inherit" : "none" }} onClick={this.props.deleteItem.bind(this, username, tileData, tileId)}>Delete</button>
+            <div className="lend-info">{username !== ownername ? "" : !!tileData[tileId].lendee ? `Lent to ${tileData[tileId].lendee}` : ""}</div>
+            <div className="lend-info">{username === tileData[tileId].lendee ? `Borrowed from ${tileData[tileId].ownername}` : ""}</div>
+            <button className="actionbtn" style={{ display: username === ownername ? "none" : !!tileData[tileId].lendee ? "none" : "inherit" }} onClick={this.props.borrowItem.bind(this, username, tileData, tileId)}>Borrow</button>
+            <button className="actionbtn"style={{ display: username === ownername ? "inherit" : "none" }} onClick={this.props.deleteItem.bind(this, username, tileData, tileId)}>Delete</button>
           </div>
         </FlipCard>
       </div>

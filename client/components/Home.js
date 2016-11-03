@@ -14,6 +14,7 @@ class Home extends Component {
     this.borrowItem = this.borrowItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.removeCookies = this.removeCookies.bind(this);
+    console.log("Home Username is", this.state.username)
   }
 
   getData() {
@@ -27,6 +28,7 @@ class Home extends Component {
   }
 
   borrowItem(username, tileData, tileId) {
+    console.log(`borrowItem: username is ${username} and ownername is ${tileData[tileId].ownername}`)
     if (username !== tileData[tileId].ownername) {
       console.log("Borrowing")
       $.post('/borrowItem', { username: username, tileData: tileData[tileId] })
@@ -58,6 +60,7 @@ class Home extends Component {
   render() {
     let children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
+        username: this.state.username,
         state: this.state,
         getData: this.getData,
         borrowItem: this.borrowItem,
