@@ -31,6 +31,18 @@ time, mark, audio, video {
 .col {
   flex: 1;
 }
+.col-title {
+  text-align: center;
+  flex: 1;
+  color: darksalmon;
+  font-family: Raleway;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: darkslateblue;
+  border-radius: 10px;
+  width: 250px;
+  margin: 25px;
+}
 .btn {
   width: 150px;
 }
