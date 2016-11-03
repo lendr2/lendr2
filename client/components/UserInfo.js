@@ -8,38 +8,27 @@ class Browse extends Component {
   }
 
   render() {
+    const tiles = [];
     const length = this.props.state.tileData.length;
-    const tilesLent = [];
     for (let i = 0; i < length; i++) {
-      console.log(this.props.state.tileData[i])
-      if (this.props.state.username === this.props.state.tileData[i].ownername && !!this.props.state.tileData[i].lendee) {
-        tilesLent.push(
-          <Tile
-            borrowItem={this.props.borrowItem.bind(this)}
-            deleteItem={this.props.deleteItem.bind(this)}
-            passedState={this.props.state}
-            />
-        );
-      }
+      tiles[i] = (
+        <Tile 
+          borrowItem={ this.props.borrowItem.bind(this) }
+          deleteItem={ this.props.deleteItem.bind(this) }
+          tileId={i}
+          passedState={this.props.state}
+          />
+      )
     }
-    const tilesBorrowed = [];
-    for (let i = 0; i < length; i++) {
-      if (this.props.state.username === this.props.state.tileData[i].lendee) {
-        tilesBorrowed.push(
-          <Tile
-            borrowItem={this.props.borrowItem.bind(this)}
-            deleteItem={this.props.deleteItem.bind(this)}
-            passedState={this.props.state}
-            />
-        );
-      }
-    }
+    const tilesLent = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].ownername && !!this.props.state.tileData[t.props.tileId].ownername})
+    const tilesBorrowed = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].lendee })
+    
     return (
       <div>
         <br />
         <div className="flex-grid">
           <div className="col">Stuff I Lent {tilesLent}</div>
-          <div className="col">Stuff I Borrow {tilesBorrowed}</div>
+          <div className="col">Stuff I Borrowed {tilesBorrowed}</div>
         </div>
       </div>
     );
