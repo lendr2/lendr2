@@ -40,8 +40,7 @@ time, mark, audio, video {
   font-family: Raleway;
   background-image: url('http://localhost:3000/background.jpg');
   background-repeat: repeat;
-  height: 100vh;
-
+  height: 3000px;
   display: flex;
   align-items: center;
   flex-direction: column;
