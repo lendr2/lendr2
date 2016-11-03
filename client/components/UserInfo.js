@@ -27,8 +27,8 @@ class Browse extends Component {
       <div>
         <br />
         <div className="flex-grid">
-          <div className="col">Stuff I Lent {tilesLent}</div>
-          <div className="col">Stuff I Borrowed {tilesBorrowed}</div>
+          <div className="col">Stuff I Lent{tilesLent}</div>
+          <div className="col">Stuff I Borrowed{tilesBorrowed}</div>
         </div>
       </div>
     );

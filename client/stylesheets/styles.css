@@ -73,6 +73,15 @@ li {
   flex-direction: row;
   width: max;
 }
+.actionbtn {
+  background-color: cornflowerblue;
+  border-radius: 5px;
+  border-color: darkslateblue;
+}
+.lend-info {
+  color: mediumvioletred;
+  font-weight: bold;
+}
 
 /* Card-Divs */
 .front-card, .back-card {
@@ -105,18 +114,23 @@ li {
     width: 250px;
     height: 300px;
   }
-  .ReactFlipCard__Front,
+  .ReactFlipCard__Front{
+    border-radius: 10px;
+    border: 1px solid darkslateblue;
+    padding: 25px;
+  }
+
   .ReactFlipCard__Back {
     border-radius: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid darkslategrey;
     padding: 25px;
   }
   .ReactFlipCard__Front, .ReactFlipCard__Front:focus {
-    background-color: #eee;
+    background-color: lightsteelblue;
     outline: 0;
   }
   .ReactFlipCard__Back, .ReactFlipCard__Back:focus {
-    background-color: #cef;
+    background-color: lightseagreen;
     outline: 0;
   }
   #example {

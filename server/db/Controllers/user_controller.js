@@ -15,7 +15,7 @@ const userController = {
   createUser: (req, res, next) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
       //ed add null here
-      bcrypt.hash(req.body.password, salt, null, function (err, hash) {
+      bcrypt.hash(req.body.password, salt, function (err, hash) {
         req.body.password = hash;// Store hash in your password DB.
         res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1); //Generate cookie
         res.cookie('username', req.body.username); //generate username cookie
