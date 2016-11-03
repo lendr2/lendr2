@@ -50,6 +50,7 @@ const userController = {
           if (user) {
             bcrypt.compare(req.body.password, user.dataValues.password, (err, val) => {
               req.session.user = user.dataValues.username;
+              res.cookie('ssid', Math.floor(Math.random() * 2132131231) + 1); //Generate cookie
               res.cookie('username', user.username);
               req.session.save(() => console.log('saving session'));
               if (val === false) res.status(400).send('no user')

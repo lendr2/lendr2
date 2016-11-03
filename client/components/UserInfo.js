@@ -12,7 +12,7 @@ class Browse extends Component {
     const length = this.props.state.tileData.length;
     for (let i = 0; i < length; i++) {
       tiles[i] = (
-        <Tile 
+        <Tile
           borrowItem={ this.props.borrowItem.bind(this) }
           deleteItem={ this.props.deleteItem.bind(this) }
           tileId={i}
@@ -20,9 +20,9 @@ class Browse extends Component {
           />
       )
     }
-    const tilesLent = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].ownername && !!this.props.state.tileData[t.props.tileId].ownername})
+    const tilesLent = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].ownername && !!this.props.state.tileData[t.props.tileId].lendee})
     const tilesBorrowed = tiles.filter(t => { return this.props.state.username === this.props.state.tileData[t.props.tileId].lendee })
-    
+
     return (
       <div>
         <br />
